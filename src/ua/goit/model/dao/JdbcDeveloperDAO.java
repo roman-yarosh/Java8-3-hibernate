@@ -4,7 +4,7 @@ package ua.goit.model.dao;
  * Created by yarosh_ra on 14.06.2017.
  */
 public class JdbcDeveloperDAO implements DeveloperDAO{
-
+//https://github.com/djandrewd/chat_test/blob/master/src/main/java/ua/goit/offine6/chat/dao/JdbcUserDao.java
     private static final String READ_SQL = "select login, password, " +
                 " username, registration_date from " +
                 " users where login = ?";
