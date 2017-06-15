@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) {
 
         DeveloperDAO developerDAO = new JdbcDeveloperDAO();
-        System.out.println(developerDAO.read(1));
+        System.out.println(developerDAO.read(2));
 
     }
 }
