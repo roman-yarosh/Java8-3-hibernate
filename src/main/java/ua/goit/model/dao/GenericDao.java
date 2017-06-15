@@ -1,6 +1,7 @@
 package ua.goit.model.dao;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Optional;
 
 public interface GenericDao<K extends Serializable, T> {
@@ -12,4 +13,6 @@ public interface GenericDao<K extends Serializable, T> {
     void update(T entity);
 
     void delete(T entity);
+
+    List<T> getAll();
 }
