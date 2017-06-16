@@ -25,7 +25,7 @@ public class Main {
                 System.out.println("Select CRUD operation: 1 - Create, 2 - Read, 3 - Update, 4 - Delete, 0 - Exit:");
                 inputCRUD = in.nextInt();
                 System.out.println("You selected entity: " + inputEntity + " and operation: " + inputCRUD);
-                scannDeveloper();
+                //scannDeveloper();
                 System.out.println("You selected entity: " + inputEntity + " and operation: " + inputCRUD);
 
 
