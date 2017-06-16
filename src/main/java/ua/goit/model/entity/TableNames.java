@@ -8,13 +8,24 @@ public enum TableNames {
     Projects(4),
     Skills(5);
 
-    private int fieldName;
+    private int tableNum;
 
-    private TableNames(int field){
-        this.fieldName = field;
+    TableNames(int num){
+        this.tableNum = num;
     }
 
     public int getTableNum() {
-        return fieldName;
+        return tableNum;
+    }
+
+    public String getAnyTableNameByNum(int tableNumber){
+        switch (tableNumber) {
+            case 1 : return "Companies";
+            case 2 : return "Customers";
+            case 3 : return "Developers";
+            case 4 : return "Projects";
+            case 5 : return "Skills";
+            default: return "";
+        }
     }
 }

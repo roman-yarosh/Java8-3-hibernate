@@ -9,6 +9,15 @@ import java.util.Optional;
 
 public class JdbcDeveloperDAO extends JdbcDBConnection implements DeveloperDAO {
 
+    private static JdbcDeveloperDAO instance;
+
+    public static JdbcDeveloperDAO getInstance() {
+        if (instance == null) {
+            instance = new JdbcDeveloperDAO();
+        }
+        return instance;
+    }
+
     private static final String READ_ALL_SQL = "select DEVELOPER_ID, NAME, EXPERIENCE, SALARY from pm.developers";
 
     private static final String READ_SQL = READ_ALL_SQL + " where DEVELOPER_ID = ?";
@@ -42,7 +51,7 @@ public class JdbcDeveloperDAO extends JdbcDBConnection implements DeveloperDAO {
     @Override
     public Optional<Developer> read(Integer key) {
         try (Connection connection = getConnection()) {
-            Developer developer = null;
+            Developer developer;
             try (PreparedStatement statement = connection.prepareStatement(READ_SQL)) {
                 statement.setInt(1, key);
                 try (ResultSet set = statement.executeQuery()) {
@@ -80,7 +89,7 @@ public class JdbcDeveloperDAO extends JdbcDBConnection implements DeveloperDAO {
                 if (!forDelete) {
                     statement.setString(2, developer.getName());
                     statement.setInt(3, developer.getExperience());
-                    statement.setInt(3, developer.getSalary());
+                    statement.setInt(4, developer.getSalary());
                 }
                 statement.executeUpdate();
             }
@@ -92,7 +101,7 @@ public class JdbcDeveloperDAO extends JdbcDBConnection implements DeveloperDAO {
     @Override
     public List<Developer> getAll() {
         List<Developer> developerList = new ArrayList<>();
-        Developer developer = null;
+        Developer developer;
         try (Connection connection = getConnection()) {
             try (PreparedStatement statement = connection.prepareStatement(READ_ALL_SQL)) {
                 try (ResultSet set = statement.executeQuery()) {
