@@ -2,7 +2,7 @@ package ua.goit.model.entity;
 
 public class Skill {
 
-    private int skillId;
+    private Long skillId;
     private String skillName;
 
     @Override
@@ -13,11 +13,11 @@ public class Skill {
                 '}';
     }
 
-    public int getSkillId() {
+    public Long getSkillId() {
         return skillId;
     }
 
-    public void setSkillId(int skillId) {
+    public void setSkillId(Long skillId) {
         this.skillId = skillId;
     }
 

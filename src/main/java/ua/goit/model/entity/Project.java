@@ -2,7 +2,7 @@ package ua.goit.model.entity;
 
 public class Project {
 
-    private int projectId;
+    private Long projectId;
     private String projectName;
     private String cost;
 
@@ -15,11 +15,11 @@ public class Project {
                 '}';
     }
 
-    public int getProjectId() {
+    public Long getProjectId() {
         return projectId;
     }
 
-    public void setProjectId(int projectId) {
+    public void setProjectId(Long projectId) {
         this.projectId = projectId;
     }
 

@@ -4,11 +4,11 @@ import java.util.List;
 
 public class Developer {
 
-    private int developerId;
+    private Long developerId;
     private String name;
     private int experience;
     private int salary;
-    //private List<Skill> skills;
+    private List<Skill> skills;
 
     @Override
     public String toString() {
@@ -17,14 +17,15 @@ public class Developer {
                 ", name='" + name + '\'' +
                 ", experience=" + experience +
                 ", salary=" + salary +
+                ", skills=" + skills +
                 '}';
     }
 
-    public int getDeveloperId() {
+    public Long getDeveloperId() {
         return developerId;
     }
 
-    public void setDeveloperId(int developerId) {
+    public void setDeveloperId(Long developerId) {
         this.developerId = developerId;
     }
 
@@ -52,7 +53,6 @@ public class Developer {
         this.salary = salary;
     }
 
-/*
     public List<Skill> getSkills() {
         return skills;
     }
@@ -60,5 +60,4 @@ public class Developer {
     public void setSkills(List<Skill> skills) {
         this.skills = skills;
     }
-*/
 }

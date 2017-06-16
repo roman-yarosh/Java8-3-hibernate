@@ -1,6 +1,6 @@
 package ua.goit.model.entity;
 
-public enum CompanyFileds {
+public enum CompanyFields {
 
     COMPANY_ID("ID компании"),
     COMPANY_NAME("Название компании"),
@@ -8,7 +8,7 @@ public enum CompanyFileds {
 
     private String fieldName;
 
-    private CompanyFileds(String field){
+    CompanyFields(String field){
         this.fieldName = field;
     }
 

@@ -2,7 +2,7 @@ package ua.goit.model.entity;
 
 public class Customer {
 
-    private int customerId;
+    private Long customerId;
     private String customerName;
     private String customerAddress;
 
@@ -15,11 +15,11 @@ public class Customer {
                 '}';
     }
 
-    public int getCustomerId() {
+    public Long getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(int customerId) {
+    public void setCustomerId(Long customerId) {
         this.customerId = customerId;
     }
 

@@ -2,7 +2,7 @@ package ua.goit.model.entity;
 
 public class Company {
 
-    private int companyId;
+    private Long companyId;
     private String companyName;
     private String companyAddress;
 
@@ -15,11 +15,11 @@ public class Company {
                 '}';
     }
 
-    public int getCompanyId() {
+    public Long getCompanyId() {
         return companyId;
     }
 
-    public void setCompanyId(int companyId) {
+    public void setCompanyId(Long companyId) {
         this.companyId = companyId;
     }
 
