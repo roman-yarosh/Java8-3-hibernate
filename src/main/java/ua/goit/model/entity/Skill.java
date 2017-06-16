@@ -1,13 +1,13 @@
 package ua.goit.model.entity;
 
-public class Skills {
+public class Skill {
 
     private int skillId;
     private String skillName;
 
     @Override
     public String toString() {
-        return "Skills{" +
+        return "Skill{" +
                 "skillId=" + skillId +
                 ", skillName='" + skillName + '\'' +
                 '}';
