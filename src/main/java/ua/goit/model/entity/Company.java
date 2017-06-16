@@ -1,6 +1,6 @@
 package ua.goit.model.entity;
 
-public class Companies {
+public class Company {
 
     private int companyId;
     private String companyName;
@@ -8,7 +8,7 @@ public class Companies {
 
     @Override
     public String toString() {
-        return "Companies{" +
+        return "Company{" +
                 "companyId=" + companyId +
                 ", companyName='" + companyName + '\'' +
                 ", companyAddress='" + companyAddress + '\'' +

@@ -8,7 +8,7 @@ public class Developer {
     private String name;
     private int experience;
     private int salary;
-    private List<Skills> skills;
+    //private List<Skill> skills;
 
     @Override
     public String toString() {
@@ -52,11 +52,13 @@ public class Developer {
         this.salary = salary;
     }
 
-    public List<Skills> getSkills() {
+/*
+    public List<Skill> getSkills() {
         return skills;
     }
 
-    public void setSkills(List<Skills> skills) {
+    public void setSkills(List<Skill> skills) {
         this.skills = skills;
     }
+*/
 }

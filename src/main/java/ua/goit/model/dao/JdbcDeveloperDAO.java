@@ -1,7 +1,6 @@
 package ua.goit.model.dao;
 
 import ua.goit.model.entity.Developer;
-import ua.goit.model.entity.Skills;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -53,12 +52,13 @@ public class JdbcDeveloperDAO extends JdbcDBConnection implements DeveloperDAO {
                     developer = getDeveloper(set);
                 }
             }
-            List<Skills> skills = new ArrayList<>();
+/*
+            List<Skill> skills = new ArrayList<>();
             try (PreparedStatement statement = connection.prepareStatement(SELECT_SKILLS_SQL)) {
                 statement.setInt(1, key);
                 try (ResultSet set = statement.executeQuery()) {
                     while (set.next()) {
-                        Skills skill = new Skills();
+                        Skill skill = new Skill();
                         skill.setSkillId(set.getInt("SKILL_ID"));
                         skill.setSkillName(set.getString("SKILL_NAME"));
                         skills.add(skill);
@@ -66,6 +66,7 @@ public class JdbcDeveloperDAO extends JdbcDBConnection implements DeveloperDAO {
                 }
             }
             developer.setSkills(skills);
+*/
             return Optional.of(developer);
         } catch (SQLException e) {
             throw new RuntimeException(e);
