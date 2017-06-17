@@ -6,7 +6,7 @@ import ua.goit.model.entity.Project;
 import java.util.List;
 import java.util.Optional;
 
-public class JdbcProjectDAO implements ProjectDAO {
+public class JdbcProjectDAO extends JdbcDBConnection implements ProjectDAO {
 
     private static JdbcProjectDAO instance;
 

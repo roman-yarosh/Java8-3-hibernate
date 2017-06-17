@@ -6,7 +6,7 @@ import ua.goit.model.entity.Skill;
 import java.util.List;
 import java.util.Optional;
 
-public class JdbcSkillDAO implements SkillDAO {
+public class JdbcSkillDAO extends JdbcDBConnection implements SkillDAO {
 
     private static JdbcSkillDAO instance;
 

@@ -45,7 +45,6 @@ public class JdbcDeveloperDAO extends JdbcDBConnection implements DeveloperDAO {
 
     @Override
     public void create(Developer developer) {
-        Long developerId = null;
         try (Connection connection = getConnection()) {
             try (PreparedStatement statement = connection.prepareStatement(CREATE_SQL)) {
                 statement.setString(1, developer.getName());
@@ -55,7 +54,6 @@ public class JdbcDeveloperDAO extends JdbcDBConnection implements DeveloperDAO {
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
-
         }
     }
 

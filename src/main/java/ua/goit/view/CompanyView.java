@@ -1,8 +1,7 @@
 package ua.goit.view;
 
 import ua.goit.controller.CompanyController;
-import ua.goit.model.entity.Company;
-import ua.goit.model.entity.CompanyFields;
+import ua.goit.model.entity.*;
 
 import java.io.IOException;
 
@@ -14,11 +13,12 @@ public class CompanyView {
 
         Company company = new Company();
         CompanyController companyController = new CompanyController();
+
         Long companyId;
         String companyName;
         String companyAddress;
 
-        writeMessage("Select CRUD operation: 1 - Create, 2 - Read, 3 - Update, 4 - Delete, 5 - ShowAll, any other - Exit to main menu,:");
+        writeMessage("Select CRUD operation: 1 - Create, 2 - Read, 3 - Update, 4 - Delete, 5 - ShowAll, 6 - Add customers, any other - Exit to main menu,:");
         int userChoise = readInt();
         switch (userChoise) {
             case 1:
@@ -68,6 +68,16 @@ public class CompanyView {
                 writeMessage("Companies list:");
                 companyController.getAll().forEach(System.out::println);
                 writeMessage("Success!");
+                break;
+            case 6:
+                writeMessage("Enter " + CompanyFields.COMPANY_ID.getFieldName() + ":");
+                companyId = readLong();
+                writeMessage("Enter new " + CustomerFields.CUSTOMER_NAME.getFieldName() + ":");
+                companyName = readString();
+                writeMessage("Enter new " + CustomerFields.CUSTOMER_ADDRESS.getFieldName() + ":");
+                companyAddress = readString();
+
+                companyController.createCompanyCustomer(companyId, companyName, companyAddress);
                 break;
             default:
                 writeMessage("Exit to main menu!");

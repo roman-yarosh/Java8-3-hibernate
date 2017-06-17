@@ -1,6 +1,6 @@
 package ua.goit.view;
 
-import ua.goit.controller.DevelopersController;
+import ua.goit.controller.DeveloperController;
 import ua.goit.model.entity.Developer;
 import ua.goit.model.entity.DeveloperFields;
 import ua.goit.model.entity.SkillFields;
@@ -89,13 +89,13 @@ public class ConsoleViewStarter {
     }
 
     private static void scannEntity(Scanner in, int inputEntity, int inputCRUD) {
-        DevelopersController developersController = new DevelopersController();
+        DeveloperController developerController = new DeveloperController();
         String devName = "";
         Long devExperience = (long) -1;
         Long devSalary = (long) -1;
 
         if (inputCRUD == 5) {
-            developersController.getAll().forEach(System.out::println);
+            developerController.getAll().forEach(System.out::println);
         }
 
         if (inputCRUD == 1) {
@@ -113,7 +113,7 @@ public class ConsoleViewStarter {
                         developer.setName(devName);
                         developer.setExperience(devExperience.intValue());
                         developer.setSalary(devSalary.intValue());
-                        developersController.create(developer);
+                        developerController.create(developer);
                         break;
                     case "Companies":
                         break;
@@ -122,7 +122,7 @@ public class ConsoleViewStarter {
                         Long developerId = (long) -1;
                         developerId = getConsoleLong(in, DeveloperFields.DEVELOPER_ID.getFieldName(), developerId);
                         skillName = getConsoleString(in, SkillFields.SKILL_NAME.getFieldName(), skillName);
-                        developersController.createDeveloperSkills(developerId, skillName);
+                        developerController.createDeveloperSkills(developerId, skillName);
                     default:
                         break;
                 }

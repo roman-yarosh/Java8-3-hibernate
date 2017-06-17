@@ -1,10 +1,13 @@
 package ua.goit.model.entity;
 
+import java.util.List;
+
 public class Company {
 
     private Long companyId;
     private String companyName;
     private String companyAddress;
+    private List<Customer> customers;
 
     @Override
     public String toString() {
@@ -12,7 +15,16 @@ public class Company {
                 "companyId=" + companyId +
                 ", companyName='" + companyName + '\'' +
                 ", companyAddress='" + companyAddress + '\'' +
+                ", customers=" + customers +
                 '}';
+    }
+
+    public List<Customer> getCustomers() {
+        return customers;
+    }
+
+    public void setCustomers(List<Customer> customers) {
+        this.customers = customers;
     }
 
     public Long getCompanyId() {

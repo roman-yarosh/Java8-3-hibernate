@@ -6,7 +6,7 @@ import ua.goit.model.entity.Customer;
 import java.util.List;
 import java.util.Optional;
 
-public class JdbcCustomerDAO implements CustomerDAO {
+public class JdbcCustomerDAO extends JdbcDBConnection implements CustomerDAO {
 
     private static JdbcCustomerDAO instance;
 

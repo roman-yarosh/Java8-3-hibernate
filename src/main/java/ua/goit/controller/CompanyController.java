@@ -34,4 +34,8 @@ public class CompanyController implements Controller<Company, Long>{
     public List<Company> getAll(){
         return jdbcCompanyDAO.getAll();
     }
+
+    public void createCompanyCustomer(Long companyId, String customerName, String customerAddress) {
+        jdbcCompanyDAO.createCompanyCustomer(companyId, customerName, customerAddress);
+    }
 }
