@@ -1,15 +1,15 @@
 package ua.goit.view;
 
 import ua.goit.controller.DevelopersController;
-import ua.goit.model.entity.*;
+import ua.goit.model.entity.Developer;
+import ua.goit.model.entity.DeveloperFields;
+import ua.goit.model.entity.SkillFields;
+import ua.goit.model.entity.TableNames;
 
 import java.io.IOException;
-import java.io.SyncFailedException;
 import java.util.Scanner;
 
-import static ua.goit.view.ConsoleViewUtils.readInt;
-import static ua.goit.view.ConsoleViewUtils.showSelectTables;
-import static ua.goit.view.ConsoleViewUtils.writeMessage;
+import static ua.goit.view.ConsoleViewUtils.*;
 
 public class ConsoleViewStarter {
 
@@ -27,38 +27,35 @@ public class ConsoleViewStarter {
         this.skillView = new SkillView();
     }
 
-    public void start() throws IOException {
+    public void startApp() throws IOException {
         int userChoise;
 
         showSelectTables();
         userChoise = readInt();
-        switch (userChoise) {
-            case 0:
-                writeMessage("Exit Project Management System!");
-                System.exit(0);
-            case 1:
-                companyView.companyViewStarter();
-                break;
-            case 2:
-                customerView.customerViewStarter();
-                break;
-            case 3:
-                developerView.developerViewStarter();
-                break;
-            case 4:
-                projectView.projectViewStarter();
-                break;
-            case 5:
-                skillView.skillViewStarter();
-                break;
-            default:
-                writeMessage("Wrong input! Try one more time!");
-                start();
-                break;
 
+        if (userChoise == 0) {
+            writeMessage("Exit Project Management System!");
+            System.exit(0);
         }
-
-//        writeMessage("");
+        if (userChoise == TableNames.Companies.getTableNum()) {
+            companyView.companyViewStarter();
+        }
+        if (userChoise == TableNames.Customers.getTableNum()) {
+            customerView.customerViewStarter();
+        }
+        if (userChoise == TableNames.Developers.getTableNum()) {
+            developerView.developerViewStarter();
+        }
+        if (userChoise == TableNames.Projects.getTableNum()) {
+            projectView.projectViewStarter();
+        }
+        if (userChoise == TableNames.Skills.getTableNum()) {
+            skillView.skillViewStarter();
+        }
+        if (userChoise > TableNames.Skills.getTableNum()) {
+            writeMessage("Wrong input! Try one more time!");
+            startApp();
+        }
     }
 
     public static void showCrudDialod() {
@@ -98,7 +95,7 @@ public class ConsoleViewStarter {
         Long devSalary = (long) -1;
 
         if (inputCRUD == 5) {
-            developersController.getAllDevelopers().forEach(System.out::println);
+            developersController.getAll().forEach(System.out::println);
         }
 
         if (inputCRUD == 1) {

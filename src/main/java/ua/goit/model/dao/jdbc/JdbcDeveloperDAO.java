@@ -121,7 +121,8 @@ public class JdbcDeveloperDAO extends JdbcDBConnection implements DeveloperDAO {
         return skills;
     }
 
-    public List<Developer> getAllDevelopers() {
+    @Override
+    public List<Developer> getAll() {
         List<Developer> developerList = new ArrayList<>();
         try (Connection connection = getConnection()) {
             try (PreparedStatement statement = connection.prepareStatement(READ_ALL_SQL)) {

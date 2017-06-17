@@ -30,8 +30,8 @@ public class DevelopersController implements Controller<Developer, Long> {
         jdbcDeveloperDAO.delete(developer);
     }
 
-    public List<Developer> getAllDevelopers() {
-        return jdbcDeveloperDAO.getAllDevelopers();
+    public List<Developer> getAll() {
+        return jdbcDeveloperDAO.getAll();
     }
 
     public void createDeveloperSkills(Long developerId, String skillName) {

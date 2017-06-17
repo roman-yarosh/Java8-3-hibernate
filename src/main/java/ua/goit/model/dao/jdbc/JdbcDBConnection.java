@@ -9,8 +9,11 @@ public class JdbcDBConnection {
     protected Connection getConnection() throws SQLException {
         String url = "jdbc:mysql://localhost:3306/pm";
         // -Dusername=XXX -Dpassword=YYYY
-        String username = System.getProperty("username");
-        String password = System.getProperty("password");
+        //String username = System.getProperty("username");
+        //String password = System.getProperty("password");
+        String username = "root";
+        String password = "root";
+
         return DriverManager.getConnection(url, username, password);
     }
 
