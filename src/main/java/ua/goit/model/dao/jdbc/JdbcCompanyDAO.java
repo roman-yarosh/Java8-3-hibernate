@@ -3,8 +3,6 @@ package ua.goit.model.dao.jdbc;
 import ua.goit.model.dao.CompanyDAO;
 import ua.goit.model.entity.Company;
 import ua.goit.model.entity.Customer;
-import ua.goit.model.entity.Developer;
-import ua.goit.model.entity.Skill;
 
 import java.sql.*;
 import java.util.ArrayList;
