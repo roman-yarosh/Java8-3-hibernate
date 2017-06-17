@@ -3,9 +3,63 @@ package ua.goit.view;
 import ua.goit.controller.DevelopersController;
 import ua.goit.model.entity.*;
 
+import java.io.IOException;
+import java.io.SyncFailedException;
 import java.util.Scanner;
 
-public class ConsoleView {
+import static ua.goit.view.ConsoleViewUtils.readInt;
+import static ua.goit.view.ConsoleViewUtils.showSelectTables;
+import static ua.goit.view.ConsoleViewUtils.writeMessage;
+
+public class ConsoleViewStarter {
+
+    private CompanyView companyView;
+    private CustomerView customerView;
+    private DeveloperView developerView;
+    private ProjectView projectView;
+    private SkillView skillView;
+
+    public ConsoleViewStarter() {
+        this.companyView = new CompanyView();
+        this.customerView = new CustomerView();
+        this.developerView = new DeveloperView();
+        this.projectView = new ProjectView();
+        this.skillView = new SkillView();
+    }
+
+    public void start() throws IOException {
+        int userChoise;
+
+        showSelectTables();
+        userChoise = readInt();
+        switch (userChoise) {
+            case 0:
+                writeMessage("Exit Project Management System!");
+                System.exit(0);
+            case 1:
+                companyView.companyViewStarter();
+                break;
+            case 2:
+                companyView.companyViewStarter();
+                break;
+            case 3:
+                companyView.companyViewStarter();
+                break;
+            case 4:
+                companyView.companyViewStarter();
+                break;
+            case 5:
+                companyView.companyViewStarter();
+                break;
+            default:
+                writeMessage("Wrong input! Try one more time!");
+                start();
+                break;
+
+        }
+
+//        writeMessage("");
+    }
 
     public static void showCrudDialod() {
         Scanner in = new Scanner(System.in);
@@ -35,14 +89,6 @@ public class ConsoleView {
                 if (inputCRUD > 0 && inputCRUD < 6) scannEntity(in, inputEntity, inputCRUD);
             } while (inputCRUD > 0);
         } while (inputEntity > 0);
-    }
-
-    private static void showSelectTables() {
-        System.out.print("Select entity: 0 - Exit");
-        for (TableNames tableName : TableNames.values()) {
-            System.out.print(", " + tableName.getTableNum() + " - " + tableName);
-        }
-        System.out.println(":");
     }
 
     private static void scannEntity(Scanner in, int inputEntity, int inputCRUD) {
@@ -114,4 +160,6 @@ public class ConsoleView {
         } while (input.length() <= 0);
         return input;
     }
+
+
 }
