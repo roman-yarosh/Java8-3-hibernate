@@ -40,16 +40,16 @@ public class ConsoleViewStarter {
                 companyView.companyViewStarter();
                 break;
             case 2:
-                companyView.companyViewStarter();
+                customerView.customerViewStarter();
                 break;
             case 3:
-                companyView.companyViewStarter();
+                developerView.developerViewStarter();
                 break;
             case 4:
-                companyView.companyViewStarter();
+                projectView.projectViewStarter();
                 break;
             case 5:
-                companyView.companyViewStarter();
+                skillView.skillViewStarter();
                 break;
             default:
                 writeMessage("Wrong input! Try one more time!");

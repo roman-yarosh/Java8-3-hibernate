@@ -1,8 +1,7 @@
 package ua.goit.controller;
 
-import ua.goit.model.dao.JdbcDeveloperDAO;
+import ua.goit.model.dao.jdbc.JdbcDeveloperDAO;
 import ua.goit.model.entity.Developer;
-import ua.goit.model.entity.Skill;
 
 import java.util.List;
 import java.util.Optional;

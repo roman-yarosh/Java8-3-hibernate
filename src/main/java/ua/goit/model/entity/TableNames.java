@@ -2,9 +2,9 @@ package ua.goit.model.entity;
 
 public enum TableNames {
 
-    Developers(1),
-    Companies(2),
-    Customers(3),
+    Companies(1),
+    Customers(2),
+    Developers(3),
     Projects(4),
     Skills(5);
 
@@ -20,9 +20,9 @@ public enum TableNames {
 
     public String getAnyTableNameByNum(int tableNumber){
         switch (tableNumber) {
-            case 1 : return "Developers";
-            case 2 : return "Companies";
-            case 3 : return "Customers";
+            case 1 : return "Companies";
+            case 2 : return "Customers";
+            case 3 : return "Developers";
             case 4 : return "Projects";
             case 5 : return "Skills";
             default: return "";

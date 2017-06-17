@@ -1,5 +1,6 @@
-package ua.goit.model.dao;
+package ua.goit.model.dao.jdbc;
 
+import ua.goit.model.dao.DeveloperDAO;
 import ua.goit.model.entity.Developer;
 import ua.goit.model.entity.Skill;
 

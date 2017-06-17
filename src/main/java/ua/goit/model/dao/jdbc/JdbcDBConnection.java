@@ -1,4 +1,4 @@
-package ua.goit.model.dao;
+package ua.goit.model.dao.jdbc;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
