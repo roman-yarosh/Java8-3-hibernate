@@ -1,5 +1,6 @@
 package ua.goit.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface Controller<T, K> {
@@ -11,4 +12,6 @@ public interface Controller<T, K> {
     void update(T entity);
 
     void delete(T entity);
+
+    List<T> getAll();
 }
