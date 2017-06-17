@@ -6,7 +6,20 @@ import ua.goit.model.entity.Customer;
 import java.util.List;
 import java.util.Optional;
 
-public class JdbsCustomerDAO implements CustomerDAO {
+public class JdbcCustomerDAO implements CustomerDAO {
+
+    private static JdbcCustomerDAO instance;
+
+    private JdbcCustomerDAO() {
+    }
+
+    public static JdbcCustomerDAO getInstance() {
+        if (instance == null) {
+            instance = new JdbcCustomerDAO();
+        }
+        return instance;
+    }
+
     @Override
     public Optional<Customer> read(Long key) {
         return null;

@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public class ProjectController implements Controller<Project, Long>{
 
-    private JdbcProjectDAO jdbcProjectDAO = new JdbcProjectDAO();
+    private JdbcProjectDAO jdbcProjectDAO = JdbcProjectDAO.getInstance();
 
     @Override
     public Optional<Project> read(Long key) {

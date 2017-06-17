@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public class CompanyController implements Controller<Company, Long>{
 
-    private JdbcCompanyDAO jdbcCompanyDAO = new JdbcCompanyDAO();
+    private JdbcCompanyDAO jdbcCompanyDAO = JdbcCompanyDAO.getInstance();
 
     @Override
     public Optional<Company> read(Long key) {

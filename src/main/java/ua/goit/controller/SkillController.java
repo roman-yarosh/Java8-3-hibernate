@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public class SkillController implements Controller<Skill, Long> {
 
-    private JdbcSkillDAO jdbcSkillDAO = new JdbcSkillDAO();
+    private JdbcSkillDAO jdbcSkillDAO = JdbcSkillDAO.getInstance();
 
     @Override
     public Optional<Skill> read(Long key) {

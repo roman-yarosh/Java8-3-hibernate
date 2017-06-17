@@ -13,6 +13,9 @@ public class JdbcDeveloperDAO extends JdbcDBConnection implements DeveloperDAO {
 
     private static JdbcDeveloperDAO instance;
 
+    private JdbcDeveloperDAO() {
+    }
+
     public static JdbcDeveloperDAO getInstance() {
         if (instance == null) {
             instance = new JdbcDeveloperDAO();

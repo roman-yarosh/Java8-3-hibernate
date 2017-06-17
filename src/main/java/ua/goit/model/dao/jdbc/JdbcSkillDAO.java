@@ -7,6 +7,19 @@ import java.util.List;
 import java.util.Optional;
 
 public class JdbcSkillDAO implements SkillDAO {
+
+    private static JdbcSkillDAO instance;
+
+    private JdbcSkillDAO() {
+    }
+
+    public static JdbcSkillDAO getInstance() {
+        if (instance == null) {
+            instance = new JdbcSkillDAO();
+        }
+        return instance;
+    }
+
     @Override
     public Optional<Skill> read(Long key) {
         return null;

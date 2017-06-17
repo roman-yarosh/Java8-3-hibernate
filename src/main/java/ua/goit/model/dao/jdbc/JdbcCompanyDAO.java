@@ -9,6 +9,18 @@ import java.util.Optional;
 
 public class JdbcCompanyDAO implements CompanyDAO{
 
+    private static JdbcCompanyDAO instance;
+
+    private JdbcCompanyDAO() {
+    }
+
+    public static JdbcCompanyDAO getInstance() {
+        if (instance == null) {
+            instance = new JdbcCompanyDAO();
+        }
+        return instance;
+    }
+
     @Override
     public Optional<Company> read(Long key) {
         return null;
