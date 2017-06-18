@@ -20,7 +20,7 @@ public class CustomerView {
         String customerName;
         String customerAddress;
 
-        writeMessage("Select CRUD operation: 1 - Create, 2 - Read, 3 - Update, 4 - Delete, 5 - ShowAll, 6 - Add projects, any other - Exit to main menu,:");
+        writeMessage("Select CRUD operation: 1 - Create, 2 - Read, 3 - Update, 4 - Delete, 5 - ShowAll, 6 - Add projects, any other - Exit to main menu:");
         int userChoise = readInt();
         switch (userChoise) {
             case 1:

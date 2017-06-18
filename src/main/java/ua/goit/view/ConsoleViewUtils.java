@@ -16,7 +16,6 @@ public class ConsoleViewUtils {
             input = Integer.parseInt(bufferedReader.readLine());
         } catch (NumberFormatException e) {
             writeMessage("Wrong input! Please enter correct integer value! " + e.getMessage());
-            e.printStackTrace();
             readInt();
         }
         return input;

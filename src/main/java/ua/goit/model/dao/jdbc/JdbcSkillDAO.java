@@ -3,6 +3,11 @@ package ua.goit.model.dao.jdbc;
 import ua.goit.model.dao.SkillDAO;
 import ua.goit.model.entity.Skill;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,50 +25,94 @@ public class JdbcSkillDAO extends JdbcDBConnection implements SkillDAO {
         return instance;
     }
 
-    private static final String READ_ALL_CUSTOMER_SQL = "select CUSTOMER_ID, CUSTOMER_NAME, CUSTOMER_ADDRESS from pm.customers";
+    private static final String READ_ALL_SKILL_SQL = "select SKILL_ID, SKILL_NAME from pm.skills";
 
-    private static final String READ_CUSTOMER_SQL = READ_ALL_CUSTOMER_SQL + " where CUSTOMER_ID = ?";
+    private static final String READ_SKILL_SQL = READ_ALL_SKILL_SQL + " where SKILL_ID = ?";
 
-    private static final String CREATE_CUSTOMER_SQL = "insert into pm.customers(CUSTOMER_NAME, CUSTOMER_ADDRESS) " +
-            "values (?, ?)";
+    private static final String CREATE_SKILL_SQL = "insert into pm.skills(SKILL_NAME) values (?)";
 
-    private static final String UPDATE_CUSTOMER_SQL = "update pm.customers set CUSTOMER_NAME = ?," +
-            " CUSTOMER_ADDRESS = ? where CUSTOMER_ID = ?";
+    private static final String UPDATE_SKILL_SQL = "update pm.skills set SKILL_NAME = ? where SKILL_ID = ?";
 
-    private static final String DELETE_CUSTOMER_SQL = "delete from pm.customers where CUSTOMER_ID = ?";
-
-    private static final String SELECT_CUSTOMER_PROJECTS_SQL = "select PROJECT_ID, PROJECT_NAME, COST from pm.projects " +
-            "where PROJECT_ID in (select PROJECT_ID from pm.customers_projects where CUSTOMER_ID = ?) ";
-
-    private static final String CREATE_PROJECT_SQL = "insert into pm.projects(PROJECT_NAME, COST)" +
-            " values (?, ?)";
-
-    private static final String CREATE_CUSTOMER_PROJECT_SQL = "insert into pm.customers_projects(CUSTOMER_ID, PROJECT_ID)" +
-            " values (?, ?)";
-
+    private static final String DELETE_SKILL_SQL = "delete from pm.skills where SKILL_ID = ?";
 
     @Override
     public Optional<Skill> read(Long key) {
-        return null;
+        try (Connection connection = getConnection()) {
+            Skill skill;
+            try (PreparedStatement statement = connection.prepareStatement(READ_SKILL_SQL)) {
+                statement.setLong(1, key);
+                try (ResultSet set = statement.executeQuery()) {
+                    if (!set.next()) {
+                        return Optional.empty();
+                    }
+                    skill = getSkill(set);
+                }
+            }
+            return Optional.of(skill);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
-    public void create(Skill entity) {
-
+    public void create(Skill skill) {
+        try (Connection connection = getConnection()) {
+            try (PreparedStatement statement = connection.prepareStatement(CREATE_SKILL_SQL)) {
+                statement.setString(1, skill.getSkillName());
+                statement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
-    public void update(Skill entity) {
-
+    public void update(Skill skill) {
+        try (Connection connection = getConnection()) {
+            try (PreparedStatement statement = connection.prepareStatement(UPDATE_SKILL_SQL)) {
+                statement.setString(1, skill.getSkillName());
+                statement.setLong(2, skill.getSkillId());
+                statement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
-    public void delete(Skill entity) {
-
+    public void delete(Skill skill) {
+        try (Connection connection = getConnection()) {
+            try (PreparedStatement statement = connection.prepareStatement(DELETE_SKILL_SQL)) {
+                statement.setLong(1, skill.getSkillId());
+                statement.executeUpdate();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     public List<Skill> getAll() {
-        return null;
+        List<Skill> skillList = new ArrayList<>();
+        try (Connection connection = getConnection()) {
+            try (PreparedStatement statement = connection.prepareStatement(READ_ALL_SKILL_SQL)) {
+                try (ResultSet set = statement.executeQuery()) {
+                    while (set.next()) {
+                        Skill skill = getSkill(set);
+                        skillList.add(skill);
+                    }
+                }
+            }
+            return skillList;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private Skill getSkill(ResultSet set) throws SQLException {
+        Skill skill = new Skill();
+        skill.setSkillId(set.getLong("SKILL_ID"));
+        skill.setSkillName(set.getString("SKILL_NAME"));
+        return skill;
     }
 }
