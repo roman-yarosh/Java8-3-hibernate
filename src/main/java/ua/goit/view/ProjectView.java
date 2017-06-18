@@ -1,6 +1,7 @@
 package ua.goit.view;
 
 import ua.goit.controller.ProjectController;
+import ua.goit.model.entity.DeveloperFields;
 import ua.goit.model.entity.Project;
 import ua.goit.model.entity.ProjectFields;
 
@@ -19,7 +20,7 @@ public class ProjectView {
         String projectName;
         int projectCost;
 
-        writeMessage("Select CRUD operation: 1 - Create, 2 - Read, 3 - Update, 4 - Delete, 5 - ShowAll, any other - Exit to main menu,:");
+        writeMessage("Select CRUD operation: 1 - Create, 2 - Read, 3 - Update, 4 - Delete, 5 - ShowAll, 6 - Add developer, any other - Exit to main menu,:");
         int userChoise = readInt();
         switch (userChoise) {
             case 1:
@@ -69,6 +70,18 @@ public class ProjectView {
                 writeMessage("Projects list:");
                 projectController.getAll().forEach(System.out::println);
                 writeMessage("Success!");
+                break;
+            case 6:
+                writeMessage("Enter " + ProjectFields.PROJECT_ID.getFieldName() + ":");
+                projectId = readLong();
+                writeMessage("Enter new " + DeveloperFields.NAME.getFieldName() + ":");
+                String developerName = readString();
+                writeMessage("Enter new " + DeveloperFields.EXPERIENCE.getFieldName() + ":");
+                int developerExperience = readInt();
+                writeMessage("Enter new " + DeveloperFields.SALARY.getFieldName() + ":");
+                int developerSalary = readInt();
+
+                projectController.createProjectDeveloper(projectId, developerName, developerExperience, developerSalary);
                 break;
             default:
                 writeMessage("Exit to main menu!");

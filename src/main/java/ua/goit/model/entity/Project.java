@@ -1,18 +1,30 @@
 package ua.goit.model.entity;
 
+import java.util.List;
+
 public class Project {
 
     private Long projectId;
     private String projectName;
     private int projectCost;
+    private List<Developer> developers;
 
     @Override
     public String toString() {
         return "Project{" +
                 "projectId=" + projectId +
                 ", projectName='" + projectName + '\'' +
-                ", projectCost='" + projectCost + '\'' +
+                ", projectCost=" + projectCost +
+                ", developers=" + developers +
                 '}';
+    }
+
+    public List<Developer> getDevelopers() {
+        return developers;
+    }
+
+    public void setDevelopers(List<Developer> developers) {
+        this.developers = developers;
     }
 
     public Long getProjectId() {

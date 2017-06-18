@@ -34,4 +34,8 @@ public class ProjectController implements Controller<Project, Long>{
     public List<Project> getAll() {
         return jdbcProjectDAO.getAll();
     }
+
+    public void createProjectDeveloper(Long projectId, String developerName, int developerExperience, int developerSalary) {
+        jdbcProjectDAO.createProjectDeveloper(projectId, developerName, developerExperience, developerSalary);
+    }
 }

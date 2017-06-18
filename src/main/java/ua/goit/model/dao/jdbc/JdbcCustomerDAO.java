@@ -83,7 +83,7 @@ public class JdbcCustomerDAO extends JdbcDBConnection implements CustomerDAO {
                     Project project = new Project();
                     project.setProjectId(set.getLong("PROJECT_ID"));
                     project.setProjectName(set.getString("PROJECT_NAME"));
-                    project.setProjectCost(set.getString("COST"));
+                    project.setProjectCost(set.getInt("COST"));
                     projects.add(project);
                 }
             }
