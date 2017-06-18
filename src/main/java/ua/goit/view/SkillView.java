@@ -4,6 +4,7 @@ import ua.goit.controller.SkillController;
 import ua.goit.model.entity.ProjectFields;
 import ua.goit.model.entity.Skill;
 import ua.goit.model.entity.SkillFields;
+import ua.goit.model.entity.TableNames;
 
 import java.io.IOException;
 

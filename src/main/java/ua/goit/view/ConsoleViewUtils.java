@@ -11,24 +11,26 @@ public class ConsoleViewUtils {
     public static BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
     public static int readInt() throws IOException {
-        int input = 0;
-        try {
-            input = Integer.parseInt(bufferedReader.readLine());
-        } catch (NumberFormatException e) {
-            writeMessage("Wrong input! Please enter correct integer value! " + e.getMessage());
-            readInt();
-        }
+        int input = -1;
+        do {
+            try {
+                input = Integer.parseInt(bufferedReader.readLine());
+            } catch (NumberFormatException e) {
+                writeMessage("Wrong input! Please enter correct integer value! " + e.getMessage());
+            }
+        } while (input == -1);
         return input;
     }
 
     public static Long readLong() throws IOException {
         Long input = null;
-        try {
-            input = Long.parseLong(bufferedReader.readLine());
-        } catch (NumberFormatException e) {
-            writeMessage("Wrong input! Please enter correct Long value! " + e.getMessage());
-            readLong();
-        }
+        do {
+            try {
+                input = Long.parseLong(bufferedReader.readLine());
+            } catch (NumberFormatException e) {
+                writeMessage("Wrong input! Please enter correct Long value! " + e.getMessage());
+            }
+        } while (input == null);
         return input;
     }
 
