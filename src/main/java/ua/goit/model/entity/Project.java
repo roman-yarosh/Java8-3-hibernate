@@ -4,7 +4,7 @@ public class Project {
 
     private Long projectId;
     private String projectName;
-    private String projectCost;
+    private int projectCost;
 
     @Override
     public String toString() {
@@ -31,11 +31,11 @@ public class Project {
         this.projectName = projectName;
     }
 
-    public String getProjectCost() {
+    public int getProjectCost() {
         return projectCost;
     }
 
-    public void setProjectCost(String projectCost) {
+    public void setProjectCost(int projectCost) {
         this.projectCost = projectCost;
     }
 }
