@@ -11,6 +11,7 @@ import static ua.goit.view.ConsoleViewUtils.*;
 
 public class SkillView {
 
+
     public void skillViewStarter() throws IOException {
 
         Skill skill = new Skill();

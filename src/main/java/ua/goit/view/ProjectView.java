@@ -11,6 +11,7 @@ import static ua.goit.view.ConsoleViewUtils.*;
 
 public class ProjectView {
 
+
     public void projectViewStarter() throws IOException {
 
         Project project = new Project();
