@@ -23,7 +23,7 @@ public class SkillView {
         writeMessage("Select CRUD operation: 1 - Create, 2 - Read, 3 - Update, 4 - Delete, 5 - ShowAll, any other - Exit to main menu:");
         int userChoice = readInt();
         switch (userChoice) {
-            case 1:
+            case CREATE:
                 writeMessage(String.format("Enter new %s:", SkillFields.SKILL_NAME.getFieldName()));
                 skillName = readString();
 
@@ -32,14 +32,14 @@ public class SkillView {
                 skillController.create(skill);
                 writeMessage("Success!");
                 break;
-            case 2:
+            case READ:
                 writeMessage(String.format("Enter %s:", SkillFields.SKILL_ID.getFieldName()));
                 skillId = readLong();
 
                 writeMessage(skillController.read(skillId).toString());
                 writeMessage("Success!");
                 break;
-            case 3:
+            case UPDATE:
                 writeMessage(String.format("Enter %s for update:", SkillFields.SKILL_ID.getFieldName()));
                 skillId = readLong();
                 writeMessage(String.format("Enter new %s:", SkillFields.SKILL_NAME.getFieldName()));
@@ -51,7 +51,7 @@ public class SkillView {
                 skillController.update(skill);
                 writeMessage("Success!");
                 break;
-            case 4:
+            case DELETE:
                 writeMessage(String.format("Enter %s for delete:", SkillFields.SKILL_ID.getFieldName()));
                 skillId = readLong();
 
@@ -60,7 +60,7 @@ public class SkillView {
                 skillController.delete(skill);
                 writeMessage("Success!");
                 break;
-            case 5:
+            case SHOWALL:
                 writeMessage("Projects list:");
                 skillController.getAll().forEach(System.out::println);
                 writeMessage("Success!");

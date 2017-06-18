@@ -11,12 +11,13 @@ public class Company {
 
     @Override
     public String toString() {
-        return "Company{" +
-                "companyId=" + companyId +
-                ", companyName='" + companyName + '\'' +
-                ", companyAddress='" + companyAddress + '\'' +
-                ", customers=" + customers +
-                '}';
+        final StringBuilder sb = new StringBuilder("Company{");
+        sb.append("companyId=").append(companyId);
+        sb.append(", companyName='").append(companyName).append('\'');
+        sb.append(", companyAddress='").append(companyAddress).append('\'');
+        sb.append(", customers=").append(customers);
+        sb.append('}');
+        return sb.toString();
     }
 
     public List<Customer> getCustomers() {

@@ -23,7 +23,7 @@ public class CustomerView {
         writeMessage("Select CRUD operation: 1 - Create, 2 - Read, 3 - Update, 4 - Delete, 5 - ShowAll, 6 - Add projects, any other - Exit to main menu:");
         int userChoice = readInt();
         switch (userChoice) {
-            case 1:
+            case CREATE:
                 writeMessage(String.format("Enter new %s:", CustomerFields.CUSTOMER_NAME.getFieldName()));
                 customerName = readString();
                 writeMessage(String.format("Enter new %s:", CustomerFields.CUSTOMER_ADDRESS.getFieldName()));
@@ -35,14 +35,14 @@ public class CustomerView {
                 customerController.create(customer);
                 writeMessage("Success!");
                 break;
-            case 2:
+            case READ:
                 writeMessage(String.format("Enter %s:", CustomerFields.CUSTOMER_ID.getFieldName()));
                 customerId = readLong();
 
                 writeMessage(customerController.read(customerId).toString());
                 writeMessage("Success!");
                 break;
-            case 3:
+            case UPDATE:
                 writeMessage(String.format("Enter %s for update:", CustomerFields.CUSTOMER_ID.getFieldName()));
                 customerId = readLong();
                 writeMessage(String.format("Enter new %s:", CustomerFields.CUSTOMER_NAME.getFieldName()));
@@ -57,7 +57,7 @@ public class CustomerView {
                 customerController.update(customer);
                 writeMessage("Success!");
                 break;
-            case 4:
+            case DELETE:
                 writeMessage(String.format("Enter %s for delete:", CustomerFields.CUSTOMER_ID.getFieldName()));
                 customerId = readLong();
 
@@ -66,12 +66,12 @@ public class CustomerView {
                 customerController.delete(customer);
                 writeMessage("Success!");
                 break;
-            case 5:
+            case SHOWALL:
                 writeMessage("Customers list:");
                 customerController.getAll().forEach(System.out::println);
                 writeMessage("Success!");
                 break;
-            case 6:
+            case ADD:
                 writeMessage(String.format("Enter %s:", CustomerFields.CUSTOMER_ID.getFieldName()));
                 customerId = readLong();
                 writeMessage(String.format("Enter new %s:", ProjectFields.PROJECT_NAME.getFieldName()));

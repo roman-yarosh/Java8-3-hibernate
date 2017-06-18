@@ -21,7 +21,7 @@ public class CompanyView {
         writeMessage("Select CRUD operation: 1 - Create, 2 - Read, 3 - Update, 4 - Delete, 5 - ShowAll, 6 - Add customers, any other - Exit to main menu:");
         int userChoice = readInt();
         switch (userChoice) {
-            case 1:
+            case CREATE:
                 writeMessage(String.format("Enter new %s:", CompanyFields.COMPANY_NAME.getFieldName()));
                 companyName = readString();
                 writeMessage(String.format("Enter new %s:", CompanyFields.COMPANY_ADDRESS.getFieldName()));
@@ -33,14 +33,14 @@ public class CompanyView {
                 companyController.create(company);
                 writeMessage("Success!");
                 break;
-            case 2:
+            case READ:
                 writeMessage(String.format("Enter %s:", CompanyFields.COMPANY_ID.getFieldName()));
                 companyId = readLong();
 
                 writeMessage(companyController.read(companyId).toString());
                 writeMessage("Success!");
                 break;
-            case 3:
+            case UPDATE:
                 writeMessage(String.format("Enter %s for update:", CompanyFields.COMPANY_ID.getFieldName()));
                 companyId = readLong();
                 writeMessage(String.format("Enter new %s:", CompanyFields.COMPANY_NAME.getFieldName()));
@@ -55,7 +55,7 @@ public class CompanyView {
                 companyController.update(company);
                 writeMessage("Success!");
                 break;
-            case 4:
+            case DELETE:
                 writeMessage(String.format("Enter %s for delete:", CompanyFields.COMPANY_ID.getFieldName()));
                 companyId = readLong();
 
@@ -64,12 +64,12 @@ public class CompanyView {
                 companyController.delete(company);
                 writeMessage("Success!");
                 break;
-            case 5:
+            case SHOWALL:
                 writeMessage("Companies list:");
                 companyController.getAll().forEach(System.out::println);
                 writeMessage("Success!");
                 break;
-            case 6:
+            case ADD:
                 writeMessage(String.format("Enter %s:", CompanyFields.COMPANY_ID.getFieldName()));
                 companyId = readLong();
                 writeMessage(String.format("Enter new %s:", CustomerFields.CUSTOMER_NAME.getFieldName()));

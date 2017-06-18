@@ -24,7 +24,7 @@ public class DeveloperView {
         writeMessage("Select CRUD operation: 1 - Create, 2 - Read, 3 - Update, 4 - Delete, 5 - ShowAll, 6 - Add skills, any other - Exit to main menu:");
         int userChoice = readInt();
         switch (userChoice) {
-            case 1:
+            case CREATE:
                 writeMessage(String.format("Enter new %s:", DeveloperFields.NAME.getFieldName()));
                 name = readString();
                 writeMessage(String.format("Enter new %s:", DeveloperFields.EXPERIENCE.getFieldName()));
@@ -39,14 +39,14 @@ public class DeveloperView {
                 developerController.create(developer);
                 writeMessage("Success!");
                 break;
-            case 2:
+            case READ:
                 writeMessage(String.format("Enter %s:", DeveloperFields.DEVELOPER_ID.getFieldName()));
                 developerId = readLong();
 
                 writeMessage(developerController.read(developerId).toString());
                 writeMessage("Success!");
                 break;
-            case 3:
+            case UPDATE:
                 writeMessage(String.format("Enter %s for update:", DeveloperFields.DEVELOPER_ID.getFieldName()));
                 developerId = readLong();
                 writeMessage(String.format("Enter new %s:", DeveloperFields.NAME.getFieldName()));
@@ -64,7 +64,7 @@ public class DeveloperView {
                 developerController.update(developer);
                 writeMessage("Success!");
                 break;
-            case 4:
+            case DELETE:
                 writeMessage(String.format("Enter %s for delete:", DeveloperFields.DEVELOPER_ID.getFieldName()));
                 developerId = readLong();
 
@@ -73,12 +73,12 @@ public class DeveloperView {
                 developerController.delete(developer);
                 writeMessage("Success!");
                 break;
-            case 5:
+            case SHOWALL:
                 writeMessage("Developers list:");
                 developerController.getAll().forEach(System.out::println);
                 writeMessage("Success!");
                 break;
-            case 6:
+            case ADD:
                 writeMessage(String.format("Enter %s:", DeveloperFields.DEVELOPER_ID.getFieldName()));
                 developerId = readLong();
                 writeMessage(String.format("Enter new %s:", SkillFields.SKILL_NAME.getFieldName()));

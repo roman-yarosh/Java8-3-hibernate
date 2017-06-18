@@ -3,12 +3,30 @@ package ua.goit.view;
 import ua.goit.model.entity.TableNames;
 
 import java.io.BufferedReader;
+import java.io.Closeable;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class ConsoleViewUtils {
+public final class ConsoleViewUtils implements Closeable{
+
+    private ConsoleViewUtils() {
+    }
+
+    @Override
+    public void close() throws IOException {
+        if(bufferedReader != null) {
+            bufferedReader.close();
+        }
+    }
 
     public static BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+
+    protected static final int CREATE  = 1;
+    protected static final int READ    = 2;
+    protected static final int UPDATE  = 3;
+    protected static final int DELETE  = 4;
+    protected static final int SHOWALL = 5;
+    protected static final int ADD     = 6;
 
     public static int readInt() throws IOException {
         int input = -1;
@@ -40,13 +58,5 @@ public class ConsoleViewUtils {
 
     public static void writeMessage(String message) {
         System.out.println(message);
-    }
-
-    public static void showSelectTables() {
-        System.out.print("Select entity for CRUD operations: 0 - Exit");
-        for (TableNames tableName : TableNames.values()) {
-            System.out.print(String.format(", %s - %s", tableName.getTableNum(), tableName));
-        }
-        System.out.println(": ");
     }
 }

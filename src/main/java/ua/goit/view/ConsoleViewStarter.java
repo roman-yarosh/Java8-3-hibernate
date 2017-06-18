@@ -25,7 +25,12 @@ public class ConsoleViewStarter {
     public void startApp() throws IOException {
         int userChoice;
 
-        showSelectTables();
+        System.out.print("Select entity for CRUD operations: 0 - Exit");
+        for (TableNames tableName : TableNames.values()) {
+            System.out.print(String.format(", %s - %s", tableName.getTableNum(), tableName));
+        }
+        writeMessage(": ");
+
         userChoice = readInt();
 
         if (userChoice == 0) {

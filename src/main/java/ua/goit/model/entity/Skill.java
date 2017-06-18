@@ -7,10 +7,11 @@ public class Skill {
 
     @Override
     public String toString() {
-        return "Skill{" +
-                "skillId=" + skillId +
-                ", skillName='" + skillName + '\'' +
-                '}';
+        final StringBuilder sb = new StringBuilder("Skill{");
+        sb.append("skillId=").append(skillId);
+        sb.append(", skillName='").append(skillName).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 
     public Long getSkillId() {

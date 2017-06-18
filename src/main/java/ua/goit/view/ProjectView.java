@@ -23,7 +23,7 @@ public class ProjectView {
         writeMessage("Select CRUD operation: 1 - Create, 2 - Read, 3 - Update, 4 - Delete, 5 - ShowAll, 6 - Add developer, any other - Exit to main menu:");
         int userChoice = readInt();
         switch (userChoice) {
-            case 1:
+            case CREATE:
                 writeMessage(String.format("Enter new %s:", ProjectFields.PROJECT_NAME.getFieldName()));
                 projectName = readString();
                 writeMessage(String.format("Enter new %s:", ProjectFields.PROJECT_COST.getFieldName()));
@@ -35,14 +35,14 @@ public class ProjectView {
                 projectController.create(project);
                 writeMessage("Success!");
                 break;
-            case 2:
+            case READ:
                 writeMessage(String.format("Enter %s:", ProjectFields.PROJECT_ID.getFieldName()));
                 projectId = readLong();
 
                 writeMessage(projectController.read(projectId).toString());
                 writeMessage("Success!");
                 break;
-            case 3:
+            case UPDATE:
                 writeMessage(String.format("Enter %s for update:", ProjectFields.PROJECT_ID.getFieldName()));
                 projectId = readLong();
                 writeMessage(String.format("Enter new %s:", ProjectFields.PROJECT_NAME.getFieldName()));
@@ -57,7 +57,7 @@ public class ProjectView {
                 projectController.update(project);
                 writeMessage("Success!");
                 break;
-            case 4:
+            case DELETE:
                 writeMessage(String.format("Enter %s for delete:", ProjectFields.PROJECT_ID.getFieldName()));
                 projectId = readLong();
 
@@ -66,12 +66,12 @@ public class ProjectView {
                 projectController.delete(project);
                 writeMessage("Success!");
                 break;
-            case 5:
+            case SHOWALL:
                 writeMessage("Projects list:");
                 projectController.getAll().forEach(System.out::println);
                 writeMessage("Success!");
                 break;
-            case 6:
+            case ADD:
                 writeMessage(String.format("Enter %s:", ProjectFields.PROJECT_ID.getFieldName()));
                 projectId = readLong();
                 writeMessage(String.format("Enter new %s:", DeveloperFields.NAME.getFieldName()));

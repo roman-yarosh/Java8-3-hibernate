@@ -12,13 +12,14 @@ public class Developer {
 
     @Override
     public String toString() {
-        return "Developer{" +
-                "developerId=" + developerId +
-                ", name='" + name + '\'' +
-                ", experience=" + experience +
-                ", salary=" + salary +
-                ", skills=" + skills +
-                '}';
+        final StringBuilder sb = new StringBuilder("Developer{");
+        sb.append("developerId=").append(developerId);
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", experience=").append(experience);
+        sb.append(", salary=").append(salary);
+        sb.append(", skills=").append(skills);
+        sb.append('}');
+        return sb.toString();
     }
 
     public Long getDeveloperId() {

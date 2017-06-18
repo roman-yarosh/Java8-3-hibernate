@@ -11,12 +11,13 @@ public class Project {
 
     @Override
     public String toString() {
-        return "Project{" +
-                "projectId=" + projectId +
-                ", projectName='" + projectName + '\'' +
-                ", projectCost=" + projectCost +
-                ", developers=" + developers +
-                '}';
+        final StringBuilder sb = new StringBuilder("Project{");
+        sb.append("projectId=").append(projectId);
+        sb.append(", projectName='").append(projectName).append('\'');
+        sb.append(", projectCost=").append(projectCost);
+        sb.append(", developers=").append(developers);
+        sb.append('}');
+        return sb.toString();
     }
 
     public List<Developer> getDevelopers() {
