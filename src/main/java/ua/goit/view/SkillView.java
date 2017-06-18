@@ -11,7 +11,6 @@ import static ua.goit.view.ConsoleViewUtils.*;
 
 public class SkillView {
 
-
     public void skillViewStarter() throws IOException {
 
         Skill skill = new Skill();
@@ -21,8 +20,8 @@ public class SkillView {
         String skillName;
 
         writeMessage("Select CRUD operation: 1 - Create, 2 - Read, 3 - Update, 4 - Delete, 5 - ShowAll, any other - Exit to main menu:");
-        int userChoise = readInt();
-        switch (userChoise) {
+        int userChoice = readInt();
+        switch (userChoice) {
             case 1:
                 writeMessage("Enter new " + SkillFields.SKILL_NAME.getFieldName() + ":");
                 skillName = readString();

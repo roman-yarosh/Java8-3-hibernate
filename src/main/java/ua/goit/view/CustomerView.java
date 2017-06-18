@@ -21,8 +21,8 @@ public class CustomerView {
         String customerAddress;
 
         writeMessage("Select CRUD operation: 1 - Create, 2 - Read, 3 - Update, 4 - Delete, 5 - ShowAll, 6 - Add projects, any other - Exit to main menu:");
-        int userChoise = readInt();
-        switch (userChoise) {
+        int userChoice = readInt();
+        switch (userChoice) {
             case 1:
                 writeMessage("Enter new " + CustomerFields.CUSTOMER_NAME.getFieldName() + ":");
                 customerName = readString();

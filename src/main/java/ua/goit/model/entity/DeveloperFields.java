@@ -9,7 +9,7 @@ public enum DeveloperFields {
 
     private String fieldName;
 
-    private DeveloperFields(String field){
+    DeveloperFields(String field){
         this.fieldName = field;
     }
 

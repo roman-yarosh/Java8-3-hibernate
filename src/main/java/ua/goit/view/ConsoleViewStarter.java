@@ -23,31 +23,31 @@ public class ConsoleViewStarter {
     }
 
     public void startApp() throws IOException {
-        int userChoise;
+        int userChoice;
 
         showSelectTables();
-        userChoise = readInt();
+        userChoice = readInt();
 
-        if (userChoise == 0) {
+        if (userChoice == 0) {
             writeMessage("Exit Project Management System!");
             System.exit(0);
         }
-        if (userChoise == TableNames.Companies.getTableNum()) {
+        if (userChoice == TableNames.Companies.getTableNum()) {
             companyView.companyViewStarter();
         }
-        if (userChoise == TableNames.Customers.getTableNum()) {
+        if (userChoice == TableNames.Customers.getTableNum()) {
             customerView.customerViewStarter();
         }
-        if (userChoise == TableNames.Developers.getTableNum()) {
+        if (userChoice == TableNames.Developers.getTableNum()) {
             developerView.developerViewStarter();
         }
-        if (userChoise == TableNames.Projects.getTableNum()) {
+        if (userChoice == TableNames.Projects.getTableNum()) {
             projectView.projectViewStarter();
         }
-        if (userChoise == TableNames.Skills.getTableNum()) {
+        if (userChoice == TableNames.Skills.getTableNum()) {
             skillView.skillViewStarter();
         }
-        if (userChoise > TableNames.Skills.getTableNum()) {
+        if (userChoice > TableNames.Skills.getTableNum()) {
             writeMessage("Wrong input! Try one more time!");
             startApp();
         }

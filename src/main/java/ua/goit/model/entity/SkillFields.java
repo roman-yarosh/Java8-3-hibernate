@@ -7,7 +7,7 @@ public enum SkillFields {
 
     private String fieldName;
 
-    private SkillFields(String field){
+    SkillFields(String field){
         this.fieldName = field;
     }
 

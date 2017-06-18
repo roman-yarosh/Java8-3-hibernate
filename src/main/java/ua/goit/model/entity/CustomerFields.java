@@ -8,7 +8,7 @@ public enum CustomerFields {
 
     private String fieldName;
 
-    private CustomerFields(String field){
+    CustomerFields(String field){
         this.fieldName = field;
     }
 
