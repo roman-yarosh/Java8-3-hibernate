@@ -4,8 +4,6 @@ import ua.goit.view.ConsoleViewStarter;
 
 import java.io.IOException;
 
-import static ua.goit.view.ConsoleViewStarter.showCrudDialod;
-
 public class PMSystemStarter {
 
     public static void main(String[] args) throws IOException {

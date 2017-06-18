@@ -4,11 +4,11 @@ public enum ProjectFields {
 
     PROJECT_ID("ID проекта"),
     PROJECT_NAME("Название проекта"),
-    COST("Стоимость проекта");
+    PROJECT_COST("Стоимость проекта");
 
     private String fieldName;
 
-    private ProjectFields(String field){
+    ProjectFields(String field){
         this.fieldName = field;
     }
 

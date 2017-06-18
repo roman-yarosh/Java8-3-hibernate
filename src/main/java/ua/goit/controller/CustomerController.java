@@ -34,4 +34,8 @@ public class CustomerController implements Controller<Customer, Long> {
     public List<Customer> getAll() {
         return jdbcCustomerDAO.getAll();
     }
+
+    public void createCustomerProject(Long customerId, String projectName, int projectCost) {
+        jdbcCustomerDAO.createCustomerProject(customerId, projectName, projectCost);
+    }
 }

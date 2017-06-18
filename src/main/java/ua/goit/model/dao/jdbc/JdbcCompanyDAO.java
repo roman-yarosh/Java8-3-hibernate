@@ -82,6 +82,7 @@ public class JdbcCompanyDAO extends JdbcDBConnection implements CompanyDAO{
         }
         return customers;
     }
+
     @Override
     public void create(Company company) {
         try (Connection connection = getConnection()) {
@@ -107,7 +108,6 @@ public class JdbcCompanyDAO extends JdbcDBConnection implements CompanyDAO{
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
     }
 
     @Override
