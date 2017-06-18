@@ -24,7 +24,7 @@ public class SkillView {
         int userChoice = readInt();
         switch (userChoice) {
             case 1:
-                writeMessage("Enter new " + SkillFields.SKILL_NAME.getFieldName() + ":");
+                writeMessage(String.format("Enter new %s:", SkillFields.SKILL_NAME.getFieldName()));
                 skillName = readString();
 
                 skill.setSkillName(skillName);
@@ -33,16 +33,16 @@ public class SkillView {
                 writeMessage("Success!");
                 break;
             case 2:
-                writeMessage("Enter " + SkillFields.SKILL_ID.getFieldName() + ":");
+                writeMessage(String.format("Enter %s:", SkillFields.SKILL_ID.getFieldName()));
                 skillId = readLong();
 
                 writeMessage(skillController.read(skillId).toString());
                 writeMessage("Success!");
                 break;
             case 3:
-                writeMessage("Enter " + SkillFields.SKILL_ID.getFieldName() + " for update:");
+                writeMessage(String.format("Enter %s for update:", SkillFields.SKILL_ID.getFieldName()));
                 skillId = readLong();
-                writeMessage("Enter new " + SkillFields.SKILL_NAME.getFieldName() + ":");
+                writeMessage(String.format("Enter new %s:", SkillFields.SKILL_NAME.getFieldName()));
                 skillName = readString();
 
                 skill.setSkillId(skillId);
@@ -52,7 +52,7 @@ public class SkillView {
                 writeMessage("Success!");
                 break;
             case 4:
-                writeMessage("Enter " + SkillFields.SKILL_ID.getFieldName() + " for delete:");
+                writeMessage(String.format("Enter %s for delete:", SkillFields.SKILL_ID.getFieldName()));
                 skillId = readLong();
 
                 skill.setSkillId(skillId);

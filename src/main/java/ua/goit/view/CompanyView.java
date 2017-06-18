@@ -22,9 +22,9 @@ public class CompanyView {
         int userChoice = readInt();
         switch (userChoice) {
             case 1:
-                writeMessage("Enter new " + CompanyFields.COMPANY_NAME.getFieldName() + ":");
+                writeMessage(String.format("Enter new %s:", CompanyFields.COMPANY_NAME.getFieldName()));
                 companyName = readString();
-                writeMessage("Enter new " + CompanyFields.COMPANY_ADDRESS.getFieldName() + ":");
+                writeMessage(String.format("Enter new %s:", CompanyFields.COMPANY_ADDRESS.getFieldName()));
                 companyAddress = readString();
 
                 company.setCompanyName(companyName);
@@ -34,18 +34,18 @@ public class CompanyView {
                 writeMessage("Success!");
                 break;
             case 2:
-                writeMessage("Enter " + CompanyFields.COMPANY_ID.getFieldName() + ":");
+                writeMessage(String.format("Enter %s:", CompanyFields.COMPANY_ID.getFieldName()));
                 companyId = readLong();
 
                 writeMessage(companyController.read(companyId).toString());
                 writeMessage("Success!");
                 break;
             case 3:
-                writeMessage("Enter " + CompanyFields.COMPANY_ID.getFieldName() + " for update:");
+                writeMessage(String.format("Enter %s for update:", CompanyFields.COMPANY_ID.getFieldName()));
                 companyId = readLong();
-                writeMessage("Enter new " + CompanyFields.COMPANY_NAME.getFieldName() + ":");
+                writeMessage(String.format("Enter new %s:", CompanyFields.COMPANY_NAME.getFieldName()));
                 companyName = readString();
-                writeMessage("Enter new " + CompanyFields.COMPANY_ADDRESS.getFieldName() + ":");
+                writeMessage(String.format("Enter new %s:", CompanyFields.COMPANY_ADDRESS.getFieldName()));
                 companyAddress = readString();
 
                 company.setCompanyId(companyId);
@@ -56,7 +56,7 @@ public class CompanyView {
                 writeMessage("Success!");
                 break;
             case 4:
-                writeMessage("Enter " + CompanyFields.COMPANY_ID.getFieldName() + " for delete:");
+                writeMessage(String.format("Enter %s for delete:", CompanyFields.COMPANY_ID.getFieldName()));
                 companyId = readLong();
 
                 company.setCompanyId(companyId);
@@ -70,11 +70,11 @@ public class CompanyView {
                 writeMessage("Success!");
                 break;
             case 6:
-                writeMessage("Enter " + CompanyFields.COMPANY_ID.getFieldName() + ":");
+                writeMessage(String.format("Enter %s:", CompanyFields.COMPANY_ID.getFieldName()));
                 companyId = readLong();
-                writeMessage("Enter new " + CustomerFields.CUSTOMER_NAME.getFieldName() + ":");
+                writeMessage(String.format("Enter new %s:", CustomerFields.CUSTOMER_NAME.getFieldName()));
                 companyName = readString();
-                writeMessage("Enter new " + CustomerFields.CUSTOMER_ADDRESS.getFieldName() + ":");
+                writeMessage(String.format("Enter new %s:", CustomerFields.CUSTOMER_ADDRESS.getFieldName()));
                 companyAddress = readString();
 
                 companyController.createCompanyCustomer(companyId, companyName, companyAddress);

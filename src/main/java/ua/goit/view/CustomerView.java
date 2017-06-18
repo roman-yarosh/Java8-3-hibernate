@@ -24,9 +24,9 @@ public class CustomerView {
         int userChoice = readInt();
         switch (userChoice) {
             case 1:
-                writeMessage("Enter new " + CustomerFields.CUSTOMER_NAME.getFieldName() + ":");
+                writeMessage(String.format("Enter new %s:", CustomerFields.CUSTOMER_NAME.getFieldName()));
                 customerName = readString();
-                writeMessage("Enter new " + CustomerFields.CUSTOMER_ADDRESS.getFieldName() + ":");
+                writeMessage(String.format("Enter new %s:", CustomerFields.CUSTOMER_ADDRESS.getFieldName()));
                 customerAddress = readString();
 
                 customer.setCustomerName(customerName);
@@ -36,18 +36,18 @@ public class CustomerView {
                 writeMessage("Success!");
                 break;
             case 2:
-                writeMessage("Enter " + CustomerFields.CUSTOMER_ID.getFieldName() + ":");
+                writeMessage(String.format("Enter %s:", CustomerFields.CUSTOMER_ID.getFieldName()));
                 customerId = readLong();
 
                 writeMessage(customerController.read(customerId).toString());
                 writeMessage("Success!");
                 break;
             case 3:
-                writeMessage("Enter " + CustomerFields.CUSTOMER_ID.getFieldName() + " for update:");
+                writeMessage(String.format("Enter %s for update:", CustomerFields.CUSTOMER_ID.getFieldName()));
                 customerId = readLong();
-                writeMessage("Enter new " + CustomerFields.CUSTOMER_NAME.getFieldName() + ":");
+                writeMessage(String.format("Enter new %s:", CustomerFields.CUSTOMER_NAME.getFieldName()));
                 customerName = readString();
-                writeMessage("Enter new " + CustomerFields.CUSTOMER_ADDRESS.getFieldName() + ":");
+                writeMessage(String.format("Enter new %s:", CustomerFields.CUSTOMER_ADDRESS.getFieldName()));
                 customerAddress = readString();
 
                 customer.setCustomerId(customerId);
@@ -58,7 +58,7 @@ public class CustomerView {
                 writeMessage("Success!");
                 break;
             case 4:
-                writeMessage("Enter " + CustomerFields.CUSTOMER_ID.getFieldName() + " for delete:");
+                writeMessage(String.format("Enter %s for delete:", CustomerFields.CUSTOMER_ID.getFieldName()));
                 customerId = readLong();
 
                 customer.setCustomerId(customerId);
@@ -72,11 +72,11 @@ public class CustomerView {
                 writeMessage("Success!");
                 break;
             case 6:
-                writeMessage("Enter " + CustomerFields.CUSTOMER_ID.getFieldName() + ":");
+                writeMessage(String.format("Enter %s:", CustomerFields.CUSTOMER_ID.getFieldName()));
                 customerId = readLong();
-                writeMessage("Enter new " + ProjectFields.PROJECT_NAME.getFieldName() + ":");
+                writeMessage(String.format("Enter new %s:", ProjectFields.PROJECT_NAME.getFieldName()));
                 String projectName = readString();
-                writeMessage("Enter new " + ProjectFields.PROJECT_COST.getFieldName() + ":");
+                writeMessage(String.format("Enter new %s:", ProjectFields.PROJECT_COST.getFieldName()));
                 int projectCost = readInt();
 
                 customerController.createCustomerProject(customerId, projectName, projectCost);

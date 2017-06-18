@@ -25,11 +25,11 @@ public class DeveloperView {
         int userChoice = readInt();
         switch (userChoice) {
             case 1:
-                writeMessage("Enter new " + DeveloperFields.NAME.getFieldName() + ":");
+                writeMessage(String.format("Enter new %s:", DeveloperFields.NAME.getFieldName()));
                 name = readString();
-                writeMessage("Enter new " + DeveloperFields.EXPERIENCE.getFieldName() + ":");
+                writeMessage(String.format("Enter new %s:", DeveloperFields.EXPERIENCE.getFieldName()));
                 experience = readInt();
-                writeMessage("Enter new " + DeveloperFields.SALARY.getFieldName() + ":");
+                writeMessage(String.format("Enter new %s:", DeveloperFields.SALARY.getFieldName()));
                 salary = readInt();
 
                 developer.setName(name);
@@ -40,20 +40,20 @@ public class DeveloperView {
                 writeMessage("Success!");
                 break;
             case 2:
-                writeMessage("Enter " + DeveloperFields.DEVELOPER_ID.getFieldName() + ":");
+                writeMessage(String.format("Enter %s:", DeveloperFields.DEVELOPER_ID.getFieldName()));
                 developerId = readLong();
 
                 writeMessage(developerController.read(developerId).toString());
                 writeMessage("Success!");
                 break;
             case 3:
-                writeMessage("Enter " + DeveloperFields.DEVELOPER_ID.getFieldName() + " for update:");
+                writeMessage(String.format("Enter %s for update:", DeveloperFields.DEVELOPER_ID.getFieldName()));
                 developerId = readLong();
-                writeMessage("Enter new " + DeveloperFields.NAME.getFieldName() + ":");
+                writeMessage(String.format("Enter new %s:", DeveloperFields.NAME.getFieldName()));
                 name = readString();
-                writeMessage("Enter new " + DeveloperFields.EXPERIENCE.getFieldName() + ":");
+                writeMessage(String.format("Enter new %s:", DeveloperFields.EXPERIENCE.getFieldName()));
                 experience = readInt();
-                writeMessage("Enter new " + DeveloperFields.SALARY.getFieldName() + ":");
+                writeMessage(String.format("Enter new %s:", DeveloperFields.SALARY.getFieldName()));
                 salary = readInt();
 
                 developer.setDeveloperId(developerId);
@@ -65,7 +65,7 @@ public class DeveloperView {
                 writeMessage("Success!");
                 break;
             case 4:
-                writeMessage("Enter " + DeveloperFields.DEVELOPER_ID.getFieldName() + " for delete:");
+                writeMessage(String.format("Enter %s for delete:", DeveloperFields.DEVELOPER_ID.getFieldName()));
                 developerId = readLong();
 
                 developer.setDeveloperId(developerId);
@@ -79,9 +79,9 @@ public class DeveloperView {
                 writeMessage("Success!");
                 break;
             case 6:
-                writeMessage("Enter " + DeveloperFields.DEVELOPER_ID.getFieldName() + ":");
+                writeMessage(String.format("Enter %s:", DeveloperFields.DEVELOPER_ID.getFieldName()));
                 developerId = readLong();
-                writeMessage("Enter new " + SkillFields.SKILL_NAME.getFieldName() + ":");
+                writeMessage(String.format("Enter new %s:", SkillFields.SKILL_NAME.getFieldName()));
                 name = readString();
 
                 developerController.createDeveloperSkills(developerId, name);

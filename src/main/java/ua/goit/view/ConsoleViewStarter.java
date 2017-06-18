@@ -32,7 +32,7 @@ public class ConsoleViewStarter {
             writeMessage("Exit Project Management System!");
             System.exit(0);
         }
-        writeMessage("Selected entity " + TableNames.Companies.getAnyTableNameByNum(userChoice) + "!");
+        writeMessage(String.format("Selected entity %s!", TableNames.Companies.getAnyTableNameByNum(userChoice)));
         if (userChoice == TableNames.Companies.getTableNum()) {
             companyView.companyViewStarter();
         }

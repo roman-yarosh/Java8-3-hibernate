@@ -24,9 +24,9 @@ public class ProjectView {
         int userChoice = readInt();
         switch (userChoice) {
             case 1:
-                writeMessage("Enter new " + ProjectFields.PROJECT_NAME.getFieldName() + ":");
+                writeMessage(String.format("Enter new %s:", ProjectFields.PROJECT_NAME.getFieldName()));
                 projectName = readString();
-                writeMessage("Enter new " + ProjectFields.PROJECT_COST.getFieldName() + ":");
+                writeMessage(String.format("Enter new %s:", ProjectFields.PROJECT_COST.getFieldName()));
                 projectCost = readInt();
 
                 project.setProjectName(projectName);
@@ -36,18 +36,18 @@ public class ProjectView {
                 writeMessage("Success!");
                 break;
             case 2:
-                writeMessage("Enter " + ProjectFields.PROJECT_ID.getFieldName() + ":");
+                writeMessage(String.format("Enter %s:", ProjectFields.PROJECT_ID.getFieldName()));
                 projectId = readLong();
 
                 writeMessage(projectController.read(projectId).toString());
                 writeMessage("Success!");
                 break;
             case 3:
-                writeMessage("Enter " + ProjectFields.PROJECT_ID.getFieldName() + " for update:");
+                writeMessage(String.format("Enter %s for update:", ProjectFields.PROJECT_ID.getFieldName()));
                 projectId = readLong();
-                writeMessage("Enter new " + ProjectFields.PROJECT_NAME.getFieldName() + ":");
+                writeMessage(String.format("Enter new %s:", ProjectFields.PROJECT_NAME.getFieldName()));
                 projectName = readString();
-                writeMessage("Enter new " + ProjectFields.PROJECT_COST.getFieldName() + ":");
+                writeMessage(String.format("Enter new %s:", ProjectFields.PROJECT_COST.getFieldName()));
                 projectCost = readInt();
 
                 project.setProjectId(projectId);
@@ -58,7 +58,7 @@ public class ProjectView {
                 writeMessage("Success!");
                 break;
             case 4:
-                writeMessage("Enter " + ProjectFields.PROJECT_ID.getFieldName() + " for delete:");
+                writeMessage(String.format("Enter %s for delete:", ProjectFields.PROJECT_ID.getFieldName()));
                 projectId = readLong();
 
                 project.setProjectId(projectId);
@@ -72,13 +72,13 @@ public class ProjectView {
                 writeMessage("Success!");
                 break;
             case 6:
-                writeMessage("Enter " + ProjectFields.PROJECT_ID.getFieldName() + ":");
+                writeMessage(String.format("Enter %s:", ProjectFields.PROJECT_ID.getFieldName()));
                 projectId = readLong();
-                writeMessage("Enter new " + DeveloperFields.NAME.getFieldName() + ":");
+                writeMessage(String.format("Enter new %s:", DeveloperFields.NAME.getFieldName()));
                 String developerName = readString();
-                writeMessage("Enter new " + DeveloperFields.EXPERIENCE.getFieldName() + ":");
+                writeMessage(String.format("Enter new %s:", DeveloperFields.EXPERIENCE.getFieldName()));
                 int developerExperience = readInt();
-                writeMessage("Enter new " + DeveloperFields.SALARY.getFieldName() + ":");
+                writeMessage(String.format("Enter new %s:", DeveloperFields.SALARY.getFieldName()));
                 int developerSalary = readInt();
 
                 projectController.createProjectDeveloper(projectId, developerName, developerExperience, developerSalary);
