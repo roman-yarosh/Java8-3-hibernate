@@ -61,7 +61,7 @@ public class SkillView {
                 writeMessage("Success!");
                 break;
             case SHOWALL:
-                writeMessage("Projects list:");
+                writeMessage("Skills list:");
                 skillController.getAll().forEach(System.out::println);
                 writeMessage("Success!");
                 break;

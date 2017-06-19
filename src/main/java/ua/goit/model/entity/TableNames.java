@@ -10,22 +10,15 @@ public enum TableNames {
 
     private int tableNum;
 
-    TableNames(int num){
-        this.tableNum = num;
+    TableNames(int tableNum) {
+        this.tableNum = tableNum;
     }
 
     public int getTableNum() {
         return tableNum;
     }
 
-    public String getAnyTableNameByNum(int tableNumber){
-        switch (tableNumber) {
-            case 1 : return "Companies";
-            case 2 : return "Customers";
-            case 3 : return "Developers";
-            case 4 : return "Projects";
-            case 5 : return "Skills";
-            default: return "";
-        }
+    public void setTableNum(int tableNum) {
+        this.tableNum = tableNum;
     }
 }

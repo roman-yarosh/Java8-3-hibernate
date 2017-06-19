@@ -25,12 +25,12 @@ public class JdbcCompanyDAO extends JdbcDBConnection implements CompanyDAO{
 
     private static final String READ_ALL_COMPANIES_SQL = "select COMPANY_ID, COMPANY_NAME, COMPANY_ADDRESS from pm.companies";
 
-    private static final String READ_COMPANY_SQL = READ_ALL_COMPANIES_SQL + " where COMPANY_ID = ?";
+    private static final String READ_COMPANY_SQL = String.format("%s %s", READ_ALL_COMPANIES_SQL, "where COMPANY_ID = ?");
 
     private static final String CREATE_COMPANY_SQL = "insert into pm.companies(COMPANY_NAME, COMPANY_ADDRESS) values (?, ?)";
 
-    private static final String UPDATE_COMPANY_SQL = "update pm.companies set COMPANY_NAME = ?," +
-            " COMPANY_ADDRESS = ? where COMPANY_ID = ?";
+    private static final String UPDATE_COMPANY_SQL = String.format("%s %s", "update pm.companies set COMPANY_NAME = ?,",
+            " COMPANY_ADDRESS = ? where COMPANY_ID = ?");
 
     private static final String DELETE_COMPANY_SQL = "delete from pm.companies where COMPANY_ID = ?";
 
