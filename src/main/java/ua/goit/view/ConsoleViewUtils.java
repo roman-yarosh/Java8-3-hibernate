@@ -1,7 +1,5 @@
 package ua.goit.view;
 
-import ua.goit.model.entity.TableNames;
-
 import java.io.BufferedReader;
 import java.io.Closeable;
 import java.io.IOException;
