@@ -13,6 +13,15 @@ import java.util.Optional;
 
 public class JdbcSkillDAO extends JdbcDBConnection implements SkillDAO {
 
+    private static final String READ_ALL_SKILL_SQL = "select SKILL_ID, SKILL_NAME from pm.skills";
+
+    private static final String READ_SKILL_SQL = String.format("%s %s", READ_ALL_SKILL_SQL, " where SKILL_ID = ?");
+
+    private static final String CREATE_SKILL_SQL = "insert into pm.skills(SKILL_NAME) values (?)";
+
+    private static final String UPDATE_SKILL_SQL = "update pm.skills set SKILL_NAME = ? where SKILL_ID = ?";
+
+    private static final String DELETE_SKILL_SQL = "delete from pm.skills where SKILL_ID = ?";
 
     private static JdbcSkillDAO instance;
 
@@ -25,16 +34,6 @@ public class JdbcSkillDAO extends JdbcDBConnection implements SkillDAO {
         }
         return instance;
     }
-
-    private static final String READ_ALL_SKILL_SQL = "select SKILL_ID, SKILL_NAME from pm.skills";
-
-    private static final String READ_SKILL_SQL = READ_ALL_SKILL_SQL + " where SKILL_ID = ?";
-
-    private static final String CREATE_SKILL_SQL = "insert into pm.skills(SKILL_NAME) values (?)";
-
-    private static final String UPDATE_SKILL_SQL = "update pm.skills set SKILL_NAME = ? where SKILL_ID = ?";
-
-    private static final String DELETE_SKILL_SQL = "delete from pm.skills where SKILL_ID = ?";
 
     @Override
     public Optional<Skill> read(Long key) {

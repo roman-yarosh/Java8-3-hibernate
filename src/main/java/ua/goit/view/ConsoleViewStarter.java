@@ -33,30 +33,34 @@ public class ConsoleViewStarter {
 
         userChoice = readInt();
 
-        if (userChoice == 0) {
-            writeMessage("Exit Project Management System!");
-            System.exit(0);
-        }
-        writeMessage(String.format("Selected entity %s!", TableNames.values()[userChoice - 1]));
-
-        if (userChoice == TableNames.Companies.getTableNum()) {
-            companyView.companyViewStarter();
-        }
-        if (userChoice == TableNames.Customers.getTableNum()) {
-            customerView.customerViewStarter();
-        }
-        if (userChoice == TableNames.Developers.getTableNum()) {
-            developerView.developerViewStarter();
-        }
-        if (userChoice == TableNames.Projects.getTableNum()) {
-            projectView.projectViewStarter();
-        }
-        if (userChoice == TableNames.Skills.getTableNum()) {
-            skillView.skillViewStarter();
-        }
-        if (userChoice > TableNames.Skills.getTableNum()) {
-            writeMessage("Wrong input! Try one more time!");
-            startApp();
+        switch (userChoice) {
+            case EXIT_SYSTEM:
+                writeMessage("Exit Project Management System!");
+                System.exit(0);
+                break;
+            case COMPANIES_TABLE:
+                writeMessage(String.format("Selected entity %s!", TableNames.Companies.getTableName()));
+                companyView.companyViewStarter();
+                break;
+            case CUSTOMERS_TABLE:
+                writeMessage(String.format("Selected entity %s!", TableNames.Customers.getTableName()));
+                customerView.customerViewStarter();
+                break;
+            case DEVELOPERS_TABLE:
+                writeMessage(String.format("Selected entity %s!", TableNames.Developers.getTableName()));
+                developerView.developerViewStarter();
+                break;
+            case PROJECTS_TABLE:
+                writeMessage(String.format("Selected entity %s!", TableNames.Projects.getTableName()));
+                projectView.projectViewStarter();
+                break;
+            case SKILLS_TABLE:
+                writeMessage(String.format("Selected entity %s!", TableNames.Skills.getTableName()));
+                skillView.skillViewStarter();
+                break;
+            default:
+                writeMessage("Wrong input! Try one more time!");
+                startApp();
         }
     }
 }

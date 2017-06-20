@@ -11,6 +11,25 @@ import java.util.Optional;
 
 public class JdbcCustomerDAO extends JdbcDBConnection implements CustomerDAO {
 
+    private static final String READ_ALL_CUSTOMER_SQL = "select CUSTOMER_ID, CUSTOMER_NAME, CUSTOMER_ADDRESS from pm.customers";
+
+    private static final String READ_CUSTOMER_SQL = String.format("%s %s", READ_ALL_CUSTOMER_SQL, "where CUSTOMER_ID = ?");
+
+    private static final String CREATE_CUSTOMER_SQL = "insert into pm.customers(CUSTOMER_NAME, CUSTOMER_ADDRESS) values (?, ?)";
+
+    private static final String UPDATE_CUSTOMER_SQL = "update pm.customers set CUSTOMER_NAME = ?, CUSTOMER_ADDRESS = ? where CUSTOMER_ID = ?";
+
+    private static final String DELETE_CUSTOMER_SQL = "delete from pm.customers where CUSTOMER_ID = ?";
+
+    private static final String SELECT_CUSTOMER_PROJECTS_SQL = String.format("%s %s","select PROJECT_ID, PROJECT_NAME, COST from pm.projects",
+            "where PROJECT_ID in (select PROJECT_ID from pm.customers_projects where CUSTOMER_ID = ?)");
+
+    private static final String CREATE_PROJECT_SQL = String.format("%s %s", "insert into pm.projects(PROJECT_NAME, COST)",
+            "values (?, ?)");
+
+    private static final String CREATE_CUSTOMER_PROJECT_SQL = String.format("%s %s", "insert into pm.customers_projects(CUSTOMER_ID, PROJECT_ID)",
+            "values (?, ?)");
+
     private static JdbcCustomerDAO instance;
 
     private JdbcCustomerDAO() {
@@ -22,27 +41,6 @@ public class JdbcCustomerDAO extends JdbcDBConnection implements CustomerDAO {
         }
         return instance;
     }
-
-    private static final String READ_ALL_CUSTOMER_SQL = "select CUSTOMER_ID, CUSTOMER_NAME, CUSTOMER_ADDRESS from pm.customers";
-
-    private static final String READ_CUSTOMER_SQL = READ_ALL_CUSTOMER_SQL + " where CUSTOMER_ID = ?";
-
-    private static final String CREATE_CUSTOMER_SQL = "insert into pm.customers(CUSTOMER_NAME, CUSTOMER_ADDRESS) " +
-            "values (?, ?)";
-
-    private static final String UPDATE_CUSTOMER_SQL = "update pm.customers set CUSTOMER_NAME = ?," +
-            " CUSTOMER_ADDRESS = ? where CUSTOMER_ID = ?";
-
-    private static final String DELETE_CUSTOMER_SQL = "delete from pm.customers where CUSTOMER_ID = ?";
-
-    private static final String SELECT_CUSTOMER_PROJECTS_SQL = "select PROJECT_ID, PROJECT_NAME, COST from pm.projects " +
-            "where PROJECT_ID in (select PROJECT_ID from pm.customers_projects where CUSTOMER_ID = ?) ";
-
-    private static final String CREATE_PROJECT_SQL = "insert into pm.projects(PROJECT_NAME, COST)" +
-            " values (?, ?)";
-
-    private static final String CREATE_CUSTOMER_PROJECT_SQL = "insert into pm.customers_projects(CUSTOMER_ID, PROJECT_ID)" +
-            " values (?, ?)";
 
     @Override
     public Optional<Customer> read(Long key) {

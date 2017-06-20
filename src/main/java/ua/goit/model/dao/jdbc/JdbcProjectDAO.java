@@ -11,6 +11,26 @@ import java.util.Optional;
 
 public class JdbcProjectDAO extends JdbcDBConnection implements ProjectDAO {
 
+    private static final String READ_ALL_PROJECT_SQL = "select PROJECT_ID, PROJECT_NAME, COST from pm.projects";
+
+    private static final String READ_PROJECT_SQL = String.format("%s %s", READ_ALL_PROJECT_SQL, "where PROJECT_ID = ?");
+
+    private static final String CREATE_PROJECT_SQL = String.format("%s %s", "insert into pm.projects(PROJECT_NAME, COST)",
+            "values (?, ?)");
+
+    private static final String UPDATE_PROJECT_SQL = String.format("%s %s", "update pm.projects set PROJECT_NAME = ?,",
+            "COST = ? where PROJECT_ID = ?");
+
+    private static final String DELETE_PROJECT_SQL = "delete from pm.projects where PROJECT_ID = ?";
+
+    private static final String SELECT_DEVELOPER_PROJECTS_SQL = String.format("%s %s", "select DEVELOPER_ID, NAME, EXPERIENCE, SALARY from pm.developers",
+            "where DEVELOPER_ID in (select DEVELOPER_ID from pm.developers_projects where PROJECT_ID = ?)");
+
+    private static final String CREATE_DEVELOPER_SQL = String.format("%s %s", "insert into pm.developers(NAME, EXPERIENCE, SALARY)",
+            "values (?, ?, ?)");
+
+    private static final String CREATE_DEVELOPERS_PROJECT_SQL = String.format("%s %s", "insert into pm.developers_projects(DEVELOPER_ID, PROJECT_ID)",
+            "values (?, ?)");
 
     private static JdbcProjectDAO instance;
 
@@ -23,27 +43,6 @@ public class JdbcProjectDAO extends JdbcDBConnection implements ProjectDAO {
         }
         return instance;
     }
-
-    private static final String READ_ALL_PROJECT_SQL = "select PROJECT_ID, PROJECT_NAME, COST from pm.projects";
-
-    private static final String READ_PROJECT_SQL = READ_ALL_PROJECT_SQL + " where PROJECT_ID = ?";
-
-    private static final String CREATE_PROJECT_SQL = "insert into pm.projects(PROJECT_NAME, COST) " +
-            "values (?, ?)";
-
-    private static final String UPDATE_PROJECT_SQL = "update pm.projects set PROJECT_NAME = ?," +
-            " COST = ? where PROJECT_ID = ?";
-
-    private static final String DELETE_PROJECT_SQL = "delete from pm.projects where PROJECT_ID = ?";
-
-    private static final String SELECT_DEVELOPER_PROJECTS_SQL = "select DEVELOPER_ID, NAME, EXPERIENCE, SALARY from pm.developers " +
-            "where DEVELOPER_ID in (select DEVELOPER_ID from pm.developers_projects where PROJECT_ID = ?) ";
-
-    private static final String CREATE_DEVELOPER_SQL = "insert into pm.developers(NAME, EXPERIENCE, SALARY)" +
-            " values (?, ?, ?)";
-
-    private static final String CREATE_DEVELOPERS_PROJECT_SQL = "insert into pm.developers_projects(DEVELOPER_ID, PROJECT_ID)" +
-            " values (?, ?)";
 
     @Override
     public Optional<Project> read(Long key) {

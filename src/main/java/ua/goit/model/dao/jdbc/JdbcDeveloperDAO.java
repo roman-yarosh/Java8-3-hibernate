@@ -11,6 +11,26 @@ import java.util.Optional;
 
 public class JdbcDeveloperDAO extends JdbcDBConnection implements DeveloperDAO {
 
+    private static final String READ_ALL_SQL = "select DEVELOPER_ID, NAME, EXPERIENCE, SALARY from pm.developers";
+
+    private static final String READ_SQL = String.format("%s %s", READ_ALL_SQL, "where DEVELOPER_ID = ?");
+
+    private static final String CREATE_SQL = String.format("%s %s", "insert into pm.developers(NAME, EXPERIENCE, SALARY)",
+            "values (?, ?, ?)");
+
+    private static final String UPDATE_SQL = String.format("%s %s", "update pm.developers set NAME = ?,",
+            "EXPERIENCE = ?, SALARY = ? where DEVELOPER_ID = ?");
+
+    private static final String DELETE_SQL = "delete from pm.developers where DEVELOPER_ID = ?";
+
+    private static final String SELECT_SKILLS_SQL = String.format("%s %s", "select SKILL_ID, SKILL_NAME from pm.skills where SKILL_ID in",
+            "(select SKILL_ID from pm.developers_skills where DEVELOPER_ID = ?)");
+
+    private static final String CREATE_SKILL_SQL = "insert into pm.skills(SKILL_NAME) values (?)";
+
+    private static final String CREATE_DEVELOPER_SKILL_SQL = String.format("%s %s", "insert into pm.developers_skills(DEVELOPER_ID, SKILL_ID)",
+            "values (?, ?)");
+
     private static JdbcDeveloperDAO instance;
 
     private JdbcDeveloperDAO() {
@@ -22,26 +42,6 @@ public class JdbcDeveloperDAO extends JdbcDBConnection implements DeveloperDAO {
         }
         return instance;
     }
-
-    private static final String READ_ALL_SQL = "select DEVELOPER_ID, NAME, EXPERIENCE, SALARY from pm.developers";
-
-    private static final String READ_SQL = READ_ALL_SQL + " where DEVELOPER_ID = ?";
-
-    private static final String CREATE_SQL = "insert into pm.developers(NAME, EXPERIENCE, SALARY) " +
-            "values (?, ?, ?)";
-
-    private static final String UPDATE_SQL = "update pm.developers set NAME = ?," +
-            " EXPERIENCE = ?, SALARY = ? where DEVELOPER_ID = ?";
-
-    private static final String DELETE_SQL = "delete from pm.developers where DEVELOPER_ID = ?";
-
-    private static final String SELECT_SKILLS_SQL = "select SKILL_ID, SKILL_NAME from pm.skills where SKILL_ID in " +
-            "(select SKILL_ID from pm.developers_skills where DEVELOPER_ID = ?) ";
-
-    private static final String CREATE_SKILL_SQL = "insert into pm.skills(SKILL_NAME) values (?)";
-
-    private static final String CREATE_DEVELOPER_SKILL_SQL = "insert into pm.developers_skills(DEVELOPER_ID, SKILL_ID)" +
-            " values (?, ?)";
 
     @Override
     public void create(Developer developer) {

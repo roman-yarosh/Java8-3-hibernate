@@ -11,6 +11,26 @@ import java.util.Optional;
 
 public class JdbcCompanyDAO extends JdbcDBConnection implements CompanyDAO{
 
+    private static final String READ_ALL_COMPANIES_SQL = "select COMPANY_ID, COMPANY_NAME, COMPANY_ADDRESS from pm.companies";
+
+    private static final String READ_COMPANY_SQL = String.format("%s %s", READ_ALL_COMPANIES_SQL, "where COMPANY_ID = ?");
+
+    private static final String CREATE_COMPANY_SQL = "insert into pm.companies(COMPANY_NAME, COMPANY_ADDRESS) values (?, ?)";
+
+    private static final String UPDATE_COMPANY_SQL = String.format("%s %s", "update pm.companies set COMPANY_NAME = ?,",
+            "COMPANY_ADDRESS = ? where COMPANY_ID = ?");
+
+    private static final String DELETE_COMPANY_SQL = "delete from pm.companies where COMPANY_ID = ?";
+
+    private static final String SELECT_COMPANY_CUSTOMERS_SQL = String.format("%s %s", "select CUSTOMER_ID, CUSTOMER_NAME, CUSTOMER_ADDRESS from pm.customers",
+            "where CUSTOMER_ID in (select CUSTOMER_ID from pm.companies_customers where COMPANY_ID = ?)");
+
+    private static final String CREATE_CUSTOMER_SQL = String.format("%s %s", "insert into pm.customers(CUSTOMER_NAME, CUSTOMER_ADDRESS)",
+            "values (?, ?)");
+
+    private static final String CREATE_COMPANY_CUSTOMER_SQL = String.format("%s %s","insert into pm.companies_customers(COMPANY_ID, CUSTOMER_ID)",
+            "values (?, ?)");
+
     private static JdbcCompanyDAO instance;
 
     private JdbcCompanyDAO() {
@@ -22,26 +42,6 @@ public class JdbcCompanyDAO extends JdbcDBConnection implements CompanyDAO{
         }
         return instance;
     }
-
-    private static final String READ_ALL_COMPANIES_SQL = "select COMPANY_ID, COMPANY_NAME, COMPANY_ADDRESS from pm.companies";
-
-    private static final String READ_COMPANY_SQL = String.format("%s %s", READ_ALL_COMPANIES_SQL, "where COMPANY_ID = ?");
-
-    private static final String CREATE_COMPANY_SQL = "insert into pm.companies(COMPANY_NAME, COMPANY_ADDRESS) values (?, ?)";
-
-    private static final String UPDATE_COMPANY_SQL = String.format("%s %s", "update pm.companies set COMPANY_NAME = ?,",
-            " COMPANY_ADDRESS = ? where COMPANY_ID = ?");
-
-    private static final String DELETE_COMPANY_SQL = "delete from pm.companies where COMPANY_ID = ?";
-
-    private static final String SELECT_COMPANY_CUSTOMERS_SQL = "select CUSTOMER_ID, CUSTOMER_NAME, CUSTOMER_ADDRESS from pm.customers " +
-            "where CUSTOMER_ID in (select CUSTOMER_ID from pm.companies_customers where COMPANY_ID = ?) ";
-
-    private static final String CREATE_CUSTOMER_SQL = "insert into pm.customers(CUSTOMER_NAME, CUSTOMER_ADDRESS)" +
-            " values (?, ?)";
-
-    private static final String CREATE_COMPANY_CUSTOMER_SQL = "insert into pm.companies_customers(COMPANY_ID, CUSTOMER_ID)" +
-            " values (?, ?)";
 
     @Override
     public Optional<Company> read(Long key) {

@@ -9,6 +9,20 @@ import java.io.InputStreamReader;
 
 public final class ConsoleViewUtils implements Closeable{
 
+    static final int CREATE  = 1;
+    static final int READ    = 2;
+    static final int UPDATE  = 3;
+    static final int DELETE  = 4;
+    static final int SHOWALL = 5;
+    static final int ADD     = 6;
+
+    static final int EXIT_SYSTEM             = 0;
+    public static final int COMPANIES_TABLE  = 1;
+    public static final int CUSTOMERS_TABLE  = 2;
+    public static final int DEVELOPERS_TABLE = 3;
+    public static final int PROJECTS_TABLE   = 4;
+    public static final int SKILLS_TABLE     = 5;
+
     private ConsoleViewUtils() {
     }
 
@@ -19,16 +33,9 @@ public final class ConsoleViewUtils implements Closeable{
         }
     }
 
-    public static BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+    private static BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
-    protected static final int CREATE  = 1;
-    protected static final int READ    = 2;
-    protected static final int UPDATE  = 3;
-    protected static final int DELETE  = 4;
-    protected static final int SHOWALL = 5;
-    protected static final int ADD     = 6;
-
-    public static int readInt() throws IOException {
+    static int readInt() throws IOException {
         int input = -1;
         do {
             try {
@@ -40,7 +47,7 @@ public final class ConsoleViewUtils implements Closeable{
         return input;
     }
 
-    public static Long readLong() throws IOException {
+    static Long readLong() throws IOException {
         Long input = null;
         do {
             try {
@@ -52,11 +59,11 @@ public final class ConsoleViewUtils implements Closeable{
         return input;
     }
 
-    public static String readString() throws IOException {
+    static String readString() throws IOException {
         return bufferedReader.readLine();
     }
 
-    public static void writeMessage(String message) {
+    static void writeMessage(String message) {
         System.out.println(message);
     }
 }
