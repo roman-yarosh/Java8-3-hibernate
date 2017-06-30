@@ -1,5 +1,6 @@
 package ua.goit.view;
 
+import ua.goit.controller.hibernate.HibernateCustomerController;
 import ua.goit.controller.jdbc.CustomerController;
 import ua.goit.model.entity.Customer;
 import ua.goit.model.entity.CustomerFields;
@@ -14,7 +15,7 @@ public class CustomerView {
     public void customerViewStarter() throws IOException {
 
         Customer customer = new Customer();
-        CustomerController customerController = new CustomerController();
+        HibernateCustomerController customerController = new HibernateCustomerController();
 
         Long customerId;
         String customerName;

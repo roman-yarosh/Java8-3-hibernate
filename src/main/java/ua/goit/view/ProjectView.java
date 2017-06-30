@@ -1,5 +1,6 @@
 package ua.goit.view;
 
+import ua.goit.controller.hibernate.HibernateProjectController;
 import ua.goit.controller.jdbc.ProjectController;
 import ua.goit.model.entity.DeveloperFields;
 import ua.goit.model.entity.Project;
@@ -14,7 +15,7 @@ public class ProjectView {
     public void projectViewStarter() throws IOException {
 
         Project project = new Project();
-        ProjectController projectController = new ProjectController();
+        HibernateProjectController projectController = new HibernateProjectController();
 
         Long projectId;
         String projectName;

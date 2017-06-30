@@ -16,12 +16,12 @@ public class Developer {
     private String name;
 
     @Column(name = "EXPERIENCE")
-    private int experience;
+    private Integer experience;
 
     @Column(name = "SALARY")
-    private int salary;
+    private Integer salary;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "developers_skills",
             joinColumns = @JoinColumn(name = "DEVELOPER_ID"),

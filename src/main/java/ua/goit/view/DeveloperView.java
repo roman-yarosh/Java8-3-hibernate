@@ -1,5 +1,6 @@
 package ua.goit.view;
 
+import ua.goit.controller.hibernate.HibernateDeveloperController;
 import ua.goit.controller.jdbc.DeveloperController;
 import ua.goit.model.entity.Developer;
 import ua.goit.model.entity.DeveloperFields;
@@ -14,7 +15,7 @@ public class DeveloperView {
     public void developerViewStarter() throws IOException {
 
         Developer developer = new Developer();
-        DeveloperController developerController = new DeveloperController();
+        HibernateDeveloperController developerController = new HibernateDeveloperController();
 
         Long developerId;
         String name;

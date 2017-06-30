@@ -16,8 +16,8 @@ public class Project {
     private String projectName;
 
     @Column(name = "COST")
-    private int projectCost;
-    @ManyToMany(cascade = CascadeType.ALL)
+    private Integer projectCost;
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "developers_projects",
             joinColumns = @JoinColumn(name = "PROJECT_ID"),

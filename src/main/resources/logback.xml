@@ -11,7 +11,7 @@
         <file>log/pms-hibernate.log</file>
         <prudent>true</prudent>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>pms-hibernate-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>log/pms-hibernate-%d{yyyy-MM-dd}.log</fileNamePattern>
         </rollingPolicy>
         <encoder>
             <pattern>%d{HH:mm:ss.SSS} %-5level [%thread] %logger{36} - %msg%n</pattern>

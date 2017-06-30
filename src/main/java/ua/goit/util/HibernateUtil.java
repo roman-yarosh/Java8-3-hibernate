@@ -8,7 +8,6 @@ public class HibernateUtil {
     private static final SessionFactory sessionFactory;
 
     static {
-        System.out.println("Static block of HibernateUtilClass!!!");
         sessionFactory = new Configuration().configure().buildSessionFactory();
     }
 

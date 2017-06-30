@@ -18,7 +18,7 @@ public class Customer {
     @Column(name = "CUSTOMER_ADDRESS")
     private String customerAddress;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
             name = "customers_projects",
             joinColumns = @JoinColumn(name = "CUSTOMER_ID"),
