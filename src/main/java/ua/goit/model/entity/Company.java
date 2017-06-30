@@ -1,12 +1,29 @@
 package ua.goit.model.entity;
 
+import javax.persistence.*;
 import java.util.List;
 
+@Entity
+@Table(name = "companies")
 public class Company {
 
+    @Id
+    @Column (name = "COMPANY_ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long companyId;
+
+    @Column(name = "COMPANY_NAME")
     private String companyName;
+
+    @Column(name = "COMPANY_ADDRESS")
     private String companyAddress;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "companies_customers",
+            joinColumns = @JoinColumn(name = "COMPANY_ID"),
+            inverseJoinColumns = @JoinColumn(name = "CUSTOMER_ID")
+    )
     private List<Customer> customers;
 
     @Override

@@ -1,6 +1,6 @@
 package ua.goit.view;
 
-import ua.goit.controller.CompanyController;
+import ua.goit.controller.jdbc.CompanyController;
 import ua.goit.model.entity.*;
 
 import java.io.IOException;

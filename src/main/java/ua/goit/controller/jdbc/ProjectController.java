@@ -1,12 +1,13 @@
-package ua.goit.controller;
+package ua.goit.controller.jdbc;
 
+import ua.goit.controller.Controller;
 import ua.goit.model.dao.jdbc.JdbcProjectDAO;
 import ua.goit.model.entity.Project;
 
 import java.util.List;
 import java.util.Optional;
 
-public class ProjectController implements Controller<Project, Long>{
+public class ProjectController implements Controller<Project, Long> {
 
 
     private JdbcProjectDAO jdbcProjectDAO = JdbcProjectDAO.getInstance();

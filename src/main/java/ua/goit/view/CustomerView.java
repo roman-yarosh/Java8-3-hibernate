@@ -1,6 +1,6 @@
 package ua.goit.view;
 
-import ua.goit.controller.CustomerController;
+import ua.goit.controller.jdbc.CustomerController;
 import ua.goit.model.entity.Customer;
 import ua.goit.model.entity.CustomerFields;
 import ua.goit.model.entity.ProjectFields;

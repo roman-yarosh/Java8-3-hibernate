@@ -1,8 +1,17 @@
 package ua.goit.model.entity;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "skills")
 public class Skill {
 
+    @Id
+    @Column(name = "SKILL_ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long skillId;
+
+    @Column(name = "SKILL_NAME")
     private String skillName;
 
     @Override

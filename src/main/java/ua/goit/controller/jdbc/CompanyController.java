@@ -1,12 +1,13 @@
-package ua.goit.controller;
+package ua.goit.controller.jdbc;
 
+import ua.goit.controller.Controller;
 import ua.goit.model.dao.jdbc.JdbcCompanyDAO;
 import ua.goit.model.entity.Company;
 
 import java.util.List;
 import java.util.Optional;
 
-public class CompanyController implements Controller<Company, Long>{
+public class CompanyController implements Controller<Company, Long> {
 
     private JdbcCompanyDAO jdbcCompanyDAO = JdbcCompanyDAO.getInstance();
 
