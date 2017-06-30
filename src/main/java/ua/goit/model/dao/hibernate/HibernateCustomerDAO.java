@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class HibernateCustomerDAO extends JdbcDBConnection implements CustomerDAO {
+public class HibernateCustomerDAO implements CustomerDAO {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(HibernateCustomerDAO.class);
 
@@ -95,7 +95,6 @@ public class HibernateCustomerDAO extends JdbcDBConnection implements CustomerDA
         try (Session session = getSessionFactory().openSession()) {
             try {
                 customerList = session.createQuery("FROM Customer").list();
-                System.out.println("Hibernate get All!!!");
             } catch (Exception e) {
                 LOGGER.error(String.format("%s %s", "Exception while selecting all customers", e.getMessage()));
             }

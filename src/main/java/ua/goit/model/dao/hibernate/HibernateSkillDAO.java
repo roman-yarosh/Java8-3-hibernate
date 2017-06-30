@@ -1,28 +1,19 @@
 package ua.goit.model.dao.hibernate;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ua.goit.model.dao.SkillDAO;
 import ua.goit.model.entity.Skill;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class HibernateSkillDAO extends JdbcDBConnection implements SkillDAO {
+public class HibernateSkillDAO implements SkillDAO {
 
-    private static final String READ_ALL_SKILL_SQL = "select SKILL_ID, SKILL_NAME from pm.skills";
-
-    private static final String READ_SKILL_SQL = String.format("%s %s", READ_ALL_SKILL_SQL, " where SKILL_ID = ?");
-
-    private static final String CREATE_SKILL_SQL = "insert into pm.skills(SKILL_NAME) values (?)";
-
-    private static final String UPDATE_SKILL_SQL = "update pm.skills set SKILL_NAME = ? where SKILL_ID = ?";
-
-    private static final String DELETE_SKILL_SQL = "delete from pm.skills where SKILL_ID = ?";
+    private static final Logger LOGGER = LoggerFactory.getLogger(HibernateSkillDAO.class);
 
     private static HibernateSkillDAO instance;
 
@@ -39,84 +30,75 @@ public class HibernateSkillDAO extends JdbcDBConnection implements SkillDAO {
         return instance;
     }
 
-    @Override
-    public Optional<Skill> read(Long key) {
-        try (Connection connection = getConnection()) {
-            Skill skill;
-            try (PreparedStatement statement = connection.prepareStatement(READ_SKILL_SQL)) {
-                statement.setLong(1, key);
-                try (ResultSet set = statement.executeQuery()) {
-                    if (!set.next()) {
-                        return Optional.empty();
-                    }
-                    skill = getSkill(set);
-                }
-            }
-            return Optional.of(skill);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+    public static SessionFactory getSessionFactory() {
+        return sessionFactory;
     }
 
     @Override
-    public void create(Skill skill) {
-        try (Connection connection = getConnection()) {
-            try (PreparedStatement statement = connection.prepareStatement(CREATE_SKILL_SQL)) {
-                statement.setString(1, skill.getSkillName());
-                statement.executeUpdate();
+    public Optional<Skill> read(Long key) {
+        try(Session session = getSessionFactory().openSession()){
+            Skill skill = session.get(Skill.class, key);
+            if (skill != null) {
+                return Optional.of(skill);
+            } else {
+                return Optional.empty();
             }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+        }    }
+
+    @Override
+    public void create(Skill skill) {
+        try (Session session = getSessionFactory().openSession()) {
+            try {
+                session.beginTransaction();
+                session.save(skill);
+                session.getTransaction().commit();
+            } catch (Exception e) {
+                session.getTransaction().rollback();
+                LOGGER.error(String.format("%s %s", "Exception while saving skill", e.getMessage()));
+            }
         }
     }
 
     @Override
     public void update(Skill skill) {
-        try (Connection connection = getConnection()) {
-            try (PreparedStatement statement = connection.prepareStatement(UPDATE_SKILL_SQL)) {
-                statement.setString(1, skill.getSkillName());
-                statement.setLong(2, skill.getSkillId());
-                statement.executeUpdate();
+        try (Session session = getSessionFactory().openSession()) {
+            try {
+                session.beginTransaction();
+                session.update(skill);
+                session.getTransaction().commit();
+            } catch (Exception e) {
+                session.getTransaction().rollback();
+                LOGGER.error(String.format("%s %s", "Exception while updating skill", e.getMessage()));
             }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
         }
+
     }
 
     @Override
     public void delete(Skill skill) {
-        try (Connection connection = getConnection()) {
-            try (PreparedStatement statement = connection.prepareStatement(DELETE_SKILL_SQL)) {
-                statement.setLong(1, skill.getSkillId());
-                statement.executeUpdate();
+        try (Session session = getSessionFactory().openSession()) {
+            try {
+                session.beginTransaction();
+                session.delete(skill);
+                session.getTransaction().commit();
+            } catch (Exception e) {
+                session.getTransaction().rollback();
+                LOGGER.error(String.format("%s %s", "Exception while deleting skill", e.getMessage()));
             }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
         }
+
     }
 
     @Override
     public List<Skill> getAll() {
         List<Skill> skillList = new ArrayList<>();
-        try (Connection connection = getConnection()) {
-            try (PreparedStatement statement = connection.prepareStatement(READ_ALL_SKILL_SQL)) {
-                try (ResultSet set = statement.executeQuery()) {
-                    while (set.next()) {
-                        Skill skill = getSkill(set);
-                        skillList.add(skill);
-                    }
-                }
+        try (Session session = getSessionFactory().openSession()) {
+            try {
+                skillList = session.createQuery("FROM Skill").list();
+            } catch (Exception e) {
+                LOGGER.error(String.format("%s %s", "Exception while selecting all skills", e.getMessage()));
             }
-            return skillList;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
         }
-    }
-
-    private Skill getSkill(ResultSet set) throws SQLException {
-        Skill skill = new Skill();
-        skill.setSkillId(set.getLong("SKILL_ID"));
-        skill.setSkillName(set.getString("SKILL_NAME"));
-        return skill;
+        return skillList;
     }
 }

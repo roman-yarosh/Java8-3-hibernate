@@ -1,36 +1,20 @@
 package ua.goit.model.dao.hibernate;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ua.goit.model.dao.CompanyDAO;
 import ua.goit.model.entity.Company;
 import ua.goit.model.entity.Customer;
 
-import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class HibernateCompanyDAO extends JdbcDBConnection implements CompanyDAO{
+public class HibernateCompanyDAO implements CompanyDAO{
 
-    private static final String READ_ALL_COMPANIES_SQL = "select COMPANY_ID, COMPANY_NAME, COMPANY_ADDRESS from pm.companies";
-
-    private static final String READ_COMPANY_SQL = String.format("%s %s", READ_ALL_COMPANIES_SQL, "where COMPANY_ID = ?");
-
-    private static final String CREATE_COMPANY_SQL = "insert into pm.companies(COMPANY_NAME, COMPANY_ADDRESS) values (?, ?)";
-
-    private static final String UPDATE_COMPANY_SQL = String.format("%s %s", "update pm.companies set COMPANY_NAME = ?,",
-            "COMPANY_ADDRESS = ? where COMPANY_ID = ?");
-
-    private static final String DELETE_COMPANY_SQL = "delete from pm.companies where COMPANY_ID = ?";
-
-    private static final String SELECT_COMPANY_CUSTOMERS_SQL = String.format("%s %s", "select CUSTOMER_ID, CUSTOMER_NAME, CUSTOMER_ADDRESS from pm.customers",
-            "where CUSTOMER_ID in (select CUSTOMER_ID from pm.companies_customers where COMPANY_ID = ?)");
-
-    private static final String CREATE_CUSTOMER_SQL = String.format("%s %s", "insert into pm.customers(CUSTOMER_NAME, CUSTOMER_ADDRESS)",
-            "values (?, ?)");
-
-    private static final String CREATE_COMPANY_CUSTOMER_SQL = String.format("%s %s","insert into pm.companies_customers(COMPANY_ID, CUSTOMER_ID)",
-            "values (?, ?)");
+    private static final Logger LOGGER = LoggerFactory.getLogger(HibernateCompanyDAO.class);
 
     private static HibernateCompanyDAO instance;
 
@@ -47,148 +31,94 @@ public class HibernateCompanyDAO extends JdbcDBConnection implements CompanyDAO{
         return instance;
     }
 
-    @Override
-    public Optional<Company> read(Long key) {
-        try (Connection connection = getConnection()) {
-            Company company;
-            try (PreparedStatement statement = connection.prepareStatement(READ_COMPANY_SQL)) {
-                statement.setLong(1, key);
-                try (ResultSet set = statement.executeQuery()) {
-                    if (!set.next()) {
-                        return Optional.empty();
-                    }
-                    company = getCompany(set);
-                }
-            }
-
-            List<Customer> customers = getCustomersForCompanies(key, connection);
-            company.setCustomers(customers);
-            return Optional.of(company);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+    public static SessionFactory getSessionFactory() {
+        return sessionFactory;
     }
 
-    private List<Customer> getCustomersForCompanies(Long companyId, Connection connection) throws SQLException {
-        List<Customer> customers = new ArrayList<>();
-        try (PreparedStatement statement = connection.prepareStatement(SELECT_COMPANY_CUSTOMERS_SQL)) {
-            statement.setLong(1, companyId);
-            try (ResultSet set = statement.executeQuery()) {
-                while (set.next()) {
-                    Customer customer = new Customer();
-                    customer.setCustomerId(set.getLong("CUSTOMER_ID"));
-                    customer.setCustomerName(set.getString("CUSTOMER_NAME"));
-                    customer.setCustomerAddress(set.getString("CUSTOMER_ADDRESS"));
-                    customers.add(customer);
-                }
+    @Override
+    public Optional<Company> read(Long key) {
+        try(Session session = getSessionFactory().openSession()){
+            Company company = session.get(Company.class, key);
+            if (company != null) {
+                return Optional.of(company);
+            } else {
+                return Optional.empty();
             }
         }
-        return customers;
     }
 
     @Override
     public void create(Company company) {
-        try (Connection connection = getConnection()) {
-            try (PreparedStatement statement = connection.prepareStatement(CREATE_COMPANY_SQL)) {
-                statement.setString(1, company.getCompanyName());
-                statement.setString(2, company.getCompanyAddress());
-                statement.executeUpdate();
+        try (Session session = getSessionFactory().openSession()) {
+            try {
+                session.beginTransaction();
+                session.save(company);
+                session.getTransaction().commit();
+            } catch (Exception e) {
+                session.getTransaction().rollback();
+                LOGGER.error(String.format("%s %s", "Exception while saving company", e.getMessage()));
             }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
         }
     }
 
     @Override
     public void update(Company company) {
-        try (Connection connection = getConnection()) {
-            try (PreparedStatement statement = connection.prepareStatement(UPDATE_COMPANY_SQL)) {
-                statement.setString(1, company.getCompanyName());
-                statement.setString(2, company.getCompanyAddress());
-                statement.setLong(3, company.getCompanyId());
-                statement.executeUpdate();
+        try (Session session = getSessionFactory().openSession()) {
+            try {
+                session.beginTransaction();
+                session.update(company);
+                session.getTransaction().commit();
+            } catch (Exception e) {
+                session.getTransaction().rollback();
+                LOGGER.error(String.format("%s %s", "Exception while updating company", e.getMessage()));
             }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
         }
     }
 
     @Override
     public void delete(Company company) {
-        try (Connection connection = getConnection()) {
-            try (PreparedStatement statement = connection.prepareStatement(DELETE_COMPANY_SQL)) {
-                statement.setLong(1, company.getCompanyId());
-                statement.executeUpdate();
+        try (Session session = getSessionFactory().openSession()) {
+            try {
+                session.beginTransaction();
+                session.delete(company);
+                session.getTransaction().commit();
+            } catch (Exception e) {
+                session.getTransaction().rollback();
+                LOGGER.error(String.format("%s %s", "Exception while deleting company", e.getMessage()));
             }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
         }
+
     }
 
     @Override
     public List<Company> getAll() {
         List<Company> companyList = new ArrayList<>();
-        try (Connection connection = getConnection()) {
-            try (PreparedStatement statement = connection.prepareStatement(READ_ALL_COMPANIES_SQL)) {
-                try (ResultSet set = statement.executeQuery()) {
-                    while (set.next()) {
-                        Company company = getCompany(set);
-                        List<Customer> customers = getCustomersForCompanies(company.getCompanyId(), connection);
-                        company.setCustomers(customers);
-                        companyList.add(company);
-                    }
-                }
+        try (Session session = getSessionFactory().openSession()) {
+            try {
+                companyList = session.createQuery("FROM Company").list();
+            } catch (Exception e) {
+                LOGGER.error(String.format("%s %s", "Exception while selecting all companies", e.getMessage()));
             }
-            return companyList;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
         }
-    }
-
-    private Company getCompany(ResultSet set) throws SQLException {
-
-        Company company = new Company();
-        company.setCompanyId(set.getLong("COMPANY_ID"));
-        company.setCompanyName(set.getString("COMPANY_NAME"));
-        company.setCompanyAddress(set.getString("COMPANY_ADDRESS"));
-        return company;
+        return companyList;
     }
 
     public void createCompanyCustomer(Long companyId, String customerName, String customerAddress) {
-
-        try (Connection connection = getConnection()) {
-            connection.setAutoCommit(false);
-            try (PreparedStatement statement = connection.prepareStatement(CREATE_CUSTOMER_SQL, Statement.RETURN_GENERATED_KEYS)) {
-                statement.setString(1, customerName);
-                statement.setString(2, customerAddress);
-                if (statement.executeUpdate() == 0) {
-                    connection.rollback();
-                    connection.setAutoCommit(true);
-                    throw new RuntimeException("Inserting company customer, no rows affected!");
-                }
-                try (ResultSet generatedKeys = statement.getGeneratedKeys()){
-                    if (generatedKeys.next()) {
-                        Long customerId =  generatedKeys.getLong(1);
-                        try (PreparedStatement statement2 = connection.prepareStatement(CREATE_COMPANY_CUSTOMER_SQL)){
-                            statement2.setLong(1, companyId);
-                            statement2.setLong(2, customerId);
-                            if (statement2.executeUpdate() == 0) {
-                                connection.rollback();
-                                connection.setAutoCommit(true);
-                                throw new RuntimeException("Inserting company customer, no rows affected!");
-                            }
-                        }
-                    }
-                    else {
-                        connection.rollback();
-                        throw new RuntimeException("Inserting company customer failed, no ID obtained!");
-                    }
-                }
+        try (Session session = getSessionFactory().openSession()) {
+            try {
+                session.beginTransaction();
+                Company company = session.get(Company.class, companyId);
+                List<Customer> customerList = company.getCustomers();
+                Customer customer = new Customer();
+                customer.setCustomerName(customerName);
+                customer.setCustomerAddress(customerAddress);
+                customerList.add(customer);
+                session.save(company);
+                session.getTransaction().commit();
+            } catch (Exception e) {
+                session.getTransaction().rollback();
+                LOGGER.error(String.format("%s %s", "Exception while creating customer for company", e.getMessage()));
             }
-            connection.commit();
-            connection.setAutoCommit(true);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
         }
     }
 }
