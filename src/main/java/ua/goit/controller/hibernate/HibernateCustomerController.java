@@ -4,13 +4,13 @@ import ua.goit.controller.Controller;
 import ua.goit.model.dao.hibernate.HibernateCustomerDAO;
 import ua.goit.model.entity.Customer;
 import ua.goit.util.HibernateUtil;
-
 import java.util.List;
 import java.util.Optional;
 
 public class HibernateCustomerController implements Controller<Customer, Long> {
 
     private HibernateCustomerDAO hibernateCustomerDAO = HibernateCustomerDAO.getInstance(HibernateUtil.getSessionFactory());
+
 
     @Override
     public Optional<Customer> read(Long key) {

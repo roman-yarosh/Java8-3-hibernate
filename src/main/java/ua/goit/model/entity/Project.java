@@ -25,6 +25,7 @@ public class Project {
     )
     private List<Developer> developers;
 
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Project{");

@@ -4,4 +4,5 @@ import ua.goit.model.entity.Company;
 
 public interface CompanyDAO extends GenericDao<Company, Long> {
 
+
 }

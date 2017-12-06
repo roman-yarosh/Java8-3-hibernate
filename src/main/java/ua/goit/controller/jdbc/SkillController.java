@@ -3,14 +3,13 @@ package ua.goit.controller.jdbc;
 import ua.goit.controller.Controller;
 import ua.goit.model.dao.jdbc.JdbcSkillDAO;
 import ua.goit.model.entity.Skill;
-
 import java.util.List;
 import java.util.Optional;
 
 public class SkillController implements Controller<Skill, Long> {
 
-
     private JdbcSkillDAO jdbcSkillDAO = JdbcSkillDAO.getInstance();
+
 
     @Override
     public Optional<Skill> read(Long key) {

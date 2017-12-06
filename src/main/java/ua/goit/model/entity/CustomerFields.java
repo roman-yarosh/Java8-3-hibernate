@@ -12,6 +12,7 @@ public enum CustomerFields {
         this.fieldName = field;
     }
 
+
     public String getFieldName() {
         return fieldName;
     }

@@ -24,6 +24,7 @@ public final class ConsoleViewUtils implements Closeable{
     private ConsoleViewUtils() {
     }
 
+
     @Override
     public void close() throws IOException {
         if(bufferedReader != null) {

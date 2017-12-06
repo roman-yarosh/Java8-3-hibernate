@@ -4,13 +4,13 @@ import ua.goit.controller.Controller;
 import ua.goit.model.dao.hibernate.HibernateSkillDAO;
 import ua.goit.model.entity.Skill;
 import ua.goit.util.HibernateUtil;
-
 import java.util.List;
 import java.util.Optional;
 
 public class HibernateSkillController implements Controller<Skill, Long> {
 
     private HibernateSkillDAO hibernateSkillDAO = HibernateSkillDAO.getInstance(HibernateUtil.getSessionFactory());
+
 
     @Override
     public Optional<Skill> read(Long key) {

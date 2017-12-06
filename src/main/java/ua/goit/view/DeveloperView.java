@@ -1,7 +1,6 @@
 package ua.goit.view;
 
 import ua.goit.controller.hibernate.HibernateDeveloperController;
-import ua.goit.controller.jdbc.DeveloperController;
 import ua.goit.model.entity.Developer;
 import ua.goit.model.entity.DeveloperFields;
 import ua.goit.model.entity.SkillFields;

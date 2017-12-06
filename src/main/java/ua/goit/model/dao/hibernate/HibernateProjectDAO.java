@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 import ua.goit.model.dao.ProjectDAO;
 import ua.goit.model.entity.Developer;
 import ua.goit.model.entity.Project;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -22,6 +21,7 @@ public class HibernateProjectDAO implements ProjectDAO {
 
     private HibernateProjectDAO() {
     }
+
 
     public static HibernateProjectDAO getInstance(SessionFactory sessionFactoryParam) {
         if (instance == null) {

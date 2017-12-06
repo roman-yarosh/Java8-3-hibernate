@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 import ua.goit.model.dao.CustomerDAO;
 import ua.goit.model.entity.Customer;
 import ua.goit.model.entity.Project;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -22,6 +21,7 @@ public class HibernateCustomerDAO implements CustomerDAO {
 
     private HibernateCustomerDAO() {
     }
+
 
     public static HibernateCustomerDAO getInstance(SessionFactory sessionFactoryParam) {
         if (instance == null) {

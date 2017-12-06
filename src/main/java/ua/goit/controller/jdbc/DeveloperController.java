@@ -3,13 +3,13 @@ package ua.goit.controller.jdbc;
 import ua.goit.controller.Controller;
 import ua.goit.model.dao.jdbc.JdbcDeveloperDAO;
 import ua.goit.model.entity.Developer;
-
 import java.util.List;
 import java.util.Optional;
 
 public class DeveloperController implements Controller<Developer, Long> {
 
     private JdbcDeveloperDAO jdbcDeveloperDAO = JdbcDeveloperDAO.getInstance();
+
 
     @Override
     public Optional<Developer> read(Long key) {

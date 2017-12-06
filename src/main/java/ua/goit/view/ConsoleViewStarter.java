@@ -1,9 +1,7 @@
 package ua.goit.view;
 
 import ua.goit.model.entity.TableNames;
-
 import java.io.IOException;
-
 import static ua.goit.view.ConsoleViewUtils.*;
 
 public class ConsoleViewStarter {

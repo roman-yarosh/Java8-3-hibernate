@@ -3,7 +3,6 @@ package ua.goit.model.dao.jdbc;
 import ua.goit.model.dao.CustomerDAO;
 import ua.goit.model.entity.Customer;
 import ua.goit.model.entity.Project;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +33,7 @@ public class JdbcCustomerDAO extends JdbcDBConnection implements CustomerDAO {
 
     private JdbcCustomerDAO() {
     }
+
 
     public static JdbcCustomerDAO getInstance() {
         if (instance == null) {

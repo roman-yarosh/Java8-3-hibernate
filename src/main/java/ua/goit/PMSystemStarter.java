@@ -1,7 +1,6 @@
 package ua.goit;
 
 import ua.goit.view.ConsoleViewStarter;
-
 import java.io.IOException;
 
 public class PMSystemStarter {

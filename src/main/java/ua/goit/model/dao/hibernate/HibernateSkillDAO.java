@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ua.goit.model.dao.SkillDAO;
 import ua.goit.model.entity.Skill;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -21,6 +20,7 @@ public class HibernateSkillDAO implements SkillDAO {
 
     private HibernateSkillDAO() {
     }
+
 
     public static HibernateSkillDAO getInstance(SessionFactory sessionFactoryParam) {
         if (instance == null) {

@@ -2,7 +2,6 @@ package ua.goit.model.dao.jdbc;
 
 import ua.goit.model.dao.SkillDAO;
 import ua.goit.model.entity.Skill;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -27,6 +26,7 @@ public class JdbcSkillDAO extends JdbcDBConnection implements SkillDAO {
 
     private JdbcSkillDAO() {
     }
+
 
     public static JdbcSkillDAO getInstance() {
         if (instance == null) {

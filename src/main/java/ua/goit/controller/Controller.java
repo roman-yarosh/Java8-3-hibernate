@@ -5,6 +5,7 @@ import java.util.Optional;
 
 public interface Controller<T, K> {
 
+
     Optional<T> read(K key);
 
     void create(T entity);

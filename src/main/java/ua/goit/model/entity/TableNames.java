@@ -18,6 +18,7 @@ public enum TableNames {
         this.tableNum = tableNum;
     }
 
+
     public String getTableName() {
         return tableName;
     }

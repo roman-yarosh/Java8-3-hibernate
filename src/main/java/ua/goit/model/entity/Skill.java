@@ -14,6 +14,7 @@ public class Skill {
     @Column(name = "SKILL_NAME")
     private String skillName;
 
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Skill{");

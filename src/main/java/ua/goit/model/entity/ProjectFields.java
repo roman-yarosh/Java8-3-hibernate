@@ -12,6 +12,7 @@ public enum ProjectFields {
         this.fieldName = field;
     }
 
+
     public String getFieldName() {
         return fieldName;
     }

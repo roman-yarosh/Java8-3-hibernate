@@ -26,6 +26,7 @@ public class Customer {
     )
     private List<Project> projects;
 
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Customer{");

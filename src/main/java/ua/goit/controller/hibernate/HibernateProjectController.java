@@ -4,13 +4,13 @@ import ua.goit.controller.Controller;
 import ua.goit.model.dao.hibernate.HibernateProjectDAO;
 import ua.goit.model.entity.Project;
 import ua.goit.util.HibernateUtil;
-
 import java.util.List;
 import java.util.Optional;
 
 public class HibernateProjectController implements Controller<Project, Long> {
 
     private HibernateProjectDAO hibernateProjectDAO = HibernateProjectDAO.getInstance(HibernateUtil.getSessionFactory());
+
 
     @Override
     public Optional<Project> read(Long key) {

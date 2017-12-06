@@ -13,6 +13,7 @@ public enum DeveloperFields {
         this.fieldName = field;
     }
 
+
     public String getFieldName() {
         return fieldName;
     }

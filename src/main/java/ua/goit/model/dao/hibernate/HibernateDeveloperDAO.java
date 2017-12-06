@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 import ua.goit.model.dao.DeveloperDAO;
 import ua.goit.model.entity.Developer;
 import ua.goit.model.entity.Skill;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -22,6 +21,7 @@ public class HibernateDeveloperDAO implements DeveloperDAO {
 
     private HibernateDeveloperDAO() {
     }
+
 
     public static HibernateDeveloperDAO getInstance(SessionFactory sessionFactoryParam) {
         if (instance == null) {

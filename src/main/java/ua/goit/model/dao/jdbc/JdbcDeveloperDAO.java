@@ -3,7 +3,6 @@ package ua.goit.model.dao.jdbc;
 import ua.goit.model.dao.DeveloperDAO;
 import ua.goit.model.entity.Developer;
 import ua.goit.model.entity.Skill;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +34,7 @@ public class JdbcDeveloperDAO extends JdbcDBConnection implements DeveloperDAO {
 
     private JdbcDeveloperDAO() {
     }
+
 
     public static JdbcDeveloperDAO getInstance() {
         if (instance == null) {

@@ -4,13 +4,13 @@ import ua.goit.controller.Controller;
 import ua.goit.model.dao.hibernate.HibernateDeveloperDAO;
 import ua.goit.model.entity.Developer;
 import ua.goit.util.HibernateUtil;
-
 import java.util.List;
 import java.util.Optional;
 
 public class HibernateDeveloperController implements Controller<Developer, Long> {
 
     private HibernateDeveloperDAO hibernateDeveloperDAO = HibernateDeveloperDAO.getInstance(HibernateUtil.getSessionFactory());
+
 
     @Override
     public Optional<Developer> read(Long key) {

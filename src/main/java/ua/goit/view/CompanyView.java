@@ -4,7 +4,6 @@ import ua.goit.controller.hibernate.HibernateCompanyController;
 import ua.goit.model.entity.Company;
 import ua.goit.model.entity.CompanyFields;
 import ua.goit.model.entity.CustomerFields;
-
 import java.io.IOException;
 
 import static ua.goit.view.ConsoleViewUtils.*;

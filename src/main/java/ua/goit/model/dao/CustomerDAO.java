@@ -4,4 +4,5 @@ import ua.goit.model.entity.Customer;
 
 public interface CustomerDAO extends GenericDao<Customer, Long> {
 
+
 }

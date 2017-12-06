@@ -3,7 +3,6 @@ package ua.goit.model.dao.jdbc;
 import ua.goit.model.dao.ProjectDAO;
 import ua.goit.model.entity.Developer;
 import ua.goit.model.entity.Project;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +35,7 @@ public class JdbcProjectDAO extends JdbcDBConnection implements ProjectDAO {
 
     private JdbcProjectDAO() {
     }
+
 
     public static JdbcProjectDAO getInstance() {
         if (instance == null) {

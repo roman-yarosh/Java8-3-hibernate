@@ -29,6 +29,7 @@ public class Developer {
     )
     private List<Skill> skills;
 
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("Developer{");

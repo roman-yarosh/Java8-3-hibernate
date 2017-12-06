@@ -55,6 +55,8 @@ CREATE TABLE `companies_customers` (
   PRIMARY KEY (`COMPANY_ID`,`CUSTOMER_ID`),
   KEY `fk_companies_has_customers_customers1_idx` (`CUSTOMER_ID`),
   KEY `fk_companies_has_customers_companies1_idx` (`COMPANY_ID`),
+  CONSTRAINT `FKl6r0vb4w106s9kyvcc5jwowce` FOREIGN KEY (`COMPANY_ID`) REFERENCES `companies` (`COMPANY_ID`),
+  CONSTRAINT `FKp2ynogi1ql8ipfbhtk265xd54` FOREIGN KEY (`CUSTOMER_ID`) REFERENCES `customers` (`CUSTOMER_ID`),
   CONSTRAINT `fk_companies_has_customers_companies1` FOREIGN KEY (`COMPANY_ID`) REFERENCES `companies` (`COMPANY_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_companies_has_customers_customers1` FOREIGN KEY (`CUSTOMER_ID`) REFERENCES `customers` (`CUSTOMER_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -138,7 +140,7 @@ CREATE TABLE `customers` (
   `CUSTOMER_NAME` varchar(100) NOT NULL,
   `CUSTOMER_ADDRESS` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`CUSTOMER_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -147,7 +149,7 @@ CREATE TABLE `customers` (
 
 LOCK TABLES `customers` WRITE;
 /*!40000 ALTER TABLE `customers` DISABLE KEYS */;
-INSERT INTO `customers` VALUES (1,'Soft Trade','Ukraine'),(2,'Soft Prom','Ukraine'),(3,'Softline','Ukraine'),(6,'Firma 2','Ukraine'),(7,'Customer-1','Ukraine');
+INSERT INTO `customers` VALUES (1,'Soft Trade','Ukraine'),(2,'Soft Prom','Ukraine'),(3,'Softline','Ukraine'),(6,'Firma 2','Ukraine'),(7,'Customer-1','Ukraine'),(10,'sadfkljhsdflkjdsa','lkasdj;flkjsad;klf');
 /*!40000 ALTER TABLE `customers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -164,6 +166,8 @@ CREATE TABLE `customers_projects` (
   PRIMARY KEY (`CUSTOMER_ID`,`PROJECT_ID`),
   KEY `fk_customers_has_projects_projects1_idx` (`PROJECT_ID`),
   KEY `fk_customers_has_projects_customers1_idx` (`CUSTOMER_ID`),
+  CONSTRAINT `FK221b6o8yyb64gl0qkobsb95jl` FOREIGN KEY (`CUSTOMER_ID`) REFERENCES `customers` (`CUSTOMER_ID`),
+  CONSTRAINT `FKmuhknu3oobgmt7e2f4euuv6og` FOREIGN KEY (`PROJECT_ID`) REFERENCES `projects` (`PROJECT_ID`),
   CONSTRAINT `fk_customers_has_projects_customers1` FOREIGN KEY (`CUSTOMER_ID`) REFERENCES `customers` (`CUSTOMER_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_customers_has_projects_projects1` FOREIGN KEY (`PROJECT_ID`) REFERENCES `projects` (`PROJECT_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -192,7 +196,7 @@ CREATE TABLE `developers` (
   `EXPERIENCE` int(11) NOT NULL,
   `SALARY` int(11) DEFAULT NULL,
   PRIMARY KEY (`DEVELOPER_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -201,7 +205,7 @@ CREATE TABLE `developers` (
 
 LOCK TABLES `developers` WRITE;
 /*!40000 ALTER TABLE `developers` DISABLE KEYS */;
-INSERT INTO `developers` VALUES (1,'Petr Simonov',2,2000),(2,'Peter Romanenko',3,3500),(3,'Andrei Komarov',2,2100),(4,'Konstantin Geiko',2,2000),(5,'Roman Yarosh',2,1500),(7,'0',0,0),(8,'Тет',2,2000),(9,'Ntcn',12,1233),(10,'qwe',2,2000),(11,'Ярош Р.А.',15,2000);
+INSERT INTO `developers` VALUES (1,'Petr Simonov',2,2000),(2,'Peter Romanenko',3,3500),(3,'Andrei Komarov',2,2100),(4,'Konstantin Geiko',2,2000),(5,'Roman Yarosh',2,1500),(7,'0',0,0),(8,'Тет',2,2000),(9,'Ntcn',12,1233),(10,'qwe',2,2000),(11,'Ярош Р.А.',15,2000),(13,'sdlkf;jas;lkfj',3,5000);
 /*!40000 ALTER TABLE `developers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -218,6 +222,8 @@ CREATE TABLE `developers_projects` (
   PRIMARY KEY (`DEVELOPER_ID`,`PROJECT_ID`),
   KEY `fk_developers_has_projects_projects1_idx` (`PROJECT_ID`),
   KEY `fk_developers_has_projects_developers1_idx` (`DEVELOPER_ID`),
+  CONSTRAINT `FKicdlo4q3et1ps60h2uxhjfygq` FOREIGN KEY (`DEVELOPER_ID`) REFERENCES `developers` (`DEVELOPER_ID`),
+  CONSTRAINT `FKle6p97ux4nk66s700jkbn0pyh` FOREIGN KEY (`PROJECT_ID`) REFERENCES `projects` (`PROJECT_ID`),
   CONSTRAINT `fk_developers_has_projects_developers1` FOREIGN KEY (`DEVELOPER_ID`) REFERENCES `developers` (`DEVELOPER_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_developers_has_projects_projects1` FOREIGN KEY (`PROJECT_ID`) REFERENCES `projects` (`PROJECT_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -246,6 +252,8 @@ CREATE TABLE `developers_skills` (
   PRIMARY KEY (`DEVELOPER_ID`,`SKILL_ID`),
   KEY `fk_developers_has_skills_skills1_idx` (`SKILL_ID`),
   KEY `fk_developers_has_skills_developers_idx` (`DEVELOPER_ID`),
+  CONSTRAINT `FK1hwxjmrqan0ft2vv6if3m4hh4` FOREIGN KEY (`DEVELOPER_ID`) REFERENCES `developers` (`DEVELOPER_ID`),
+  CONSTRAINT `FKfvo53ftj0gqmj73pf0acqmbbp` FOREIGN KEY (`SKILL_ID`) REFERENCES `skills` (`SKILL_ID`),
   CONSTRAINT `fk_developers_has_skills_developers` FOREIGN KEY (`DEVELOPER_ID`) REFERENCES `developers` (`DEVELOPER_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_developers_has_skills_skills1` FOREIGN KEY (`SKILL_ID`) REFERENCES `skills` (`SKILL_ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -273,7 +281,7 @@ CREATE TABLE `projects` (
   `PROJECT_NAME` varchar(100) NOT NULL,
   `COST` int(11) DEFAULT NULL,
   PRIMARY KEY (`PROJECT_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -282,7 +290,7 @@ CREATE TABLE `projects` (
 
 LOCK TABLES `projects` WRITE;
 /*!40000 ALTER TABLE `projects` DISABLE KEYS */;
-INSERT INTO `projects` VALUES (1,'Project 1',4500),(2,'Project 2',6500),(3,'Project 3',3100),(4,'Project 4',NULL),(5,'Project 5',NULL),(6,'Project 6',NULL),(7,'Project-1 new',1235);
+INSERT INTO `projects` VALUES (1,'Project 1',4500),(2,'Project 2',6500),(3,'Project 3',3100),(4,'Project 4',NULL),(5,'Project 5',NULL),(6,'Project 6',NULL),(7,'Project-1 new',1235),(9,'ProjectH1',3000);
 /*!40000 ALTER TABLE `projects` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -297,7 +305,7 @@ CREATE TABLE `skills` (
   `SKILL_ID` int(11) NOT NULL AUTO_INCREMENT,
   `SKILL_NAME` varchar(100) NOT NULL,
   PRIMARY KEY (`SKILL_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -306,7 +314,7 @@ CREATE TABLE `skills` (
 
 LOCK TABLES `skills` WRITE;
 /*!40000 ALTER TABLE `skills` DISABLE KEYS */;
-INSERT INTO `skills` VALUES (1,'Java'),(2,'C#'),(3,'Java'),(4,'JPA'),(5,'Hibernate'),(6,'test'),(8,'Java EE');
+INSERT INTO `skills` VALUES (1,'Java'),(2,'C#'),(3,'Java'),(4,'JPA'),(5,'Hibernate'),(6,'test'),(8,'Java EE'),(10,'Java!!!');
 /*!40000 ALTER TABLE `skills` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -319,4 +327,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-06-30 19:23:26
+-- Dump completed on 2017-12-06 20:54:59
